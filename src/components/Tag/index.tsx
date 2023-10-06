@@ -1,7 +1,7 @@
 import { TagName } from './style'
 
 export type Props = {
-  children: string
+  children: string | number
   tag: 'normal' | 'bold'
 }
 

@@ -1,5 +1,8 @@
+import { Link } from 'react-router-dom'
+
 import logo from '../../assets/images/Vetor_Logo.png'
 import carrinho from '../../assets/images/shopping-cart 1.svg'
+
 import {
   Cabecalho,
   ContainerHeader,
@@ -11,13 +14,15 @@ import {
 const Header = () => (
   <Cabecalho>
     <ContainerHeader>
-      <img src={logo} alt="Trevo da gastronomia" />
+      <Link to="/">
+        <img src={logo} alt="Trevo da gastronomia" />
+      </Link>
       <Links>
         <li>
           <a href="">Restaurantes</a>
         </li>
         <li>
-          <a href="">Menu</a>
+          <Link to="/menu">Menu</Link>
         </li>
         <li>
           <a href="">Destaques</a>
