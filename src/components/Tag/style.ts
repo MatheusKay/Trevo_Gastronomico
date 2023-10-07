@@ -5,7 +5,8 @@ import { Props } from '.'
 
 export const TagName = styled.span<Props>`
   padding: 4px 6px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   background-color: ${cores.violeta};
   font-size: 12px;
   font-weight: ${(props) => (props.tag === 'normal' ? 'normal' : 'bold')};

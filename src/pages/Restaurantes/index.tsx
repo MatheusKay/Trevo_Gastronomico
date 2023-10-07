@@ -1,57 +1,51 @@
-import Banner from '../../components/Banner'
 import PratosList from '../../components/PratosList'
 import Menu from '../../models/Cardapio'
-
-import imgCarpaccio from '../../assets/images/ImgPratos/Carpaccio_Carne.png'
-import imgSalmao from '../../assets/images/ImgPratos/Salmao_Grelhado.png'
-import imgMoussaka from '../../assets/images/ImgPratos/Moussaka.png'
-import imgTiramisu from '../../assets/images/ImgPratos/Tiramisu.png'
 
 import imgDoces from '../../assets/images/imgRest/Rest_Doces.png'
 import imgSabor from '../../assets/images/imgRest/Rest_Sabor.png'
 import imgTrattoria from '../../assets/images/imgRest/Rest_Trattoria.png'
 import imgChurrascaria from '../../assets/images/imgRest/Rest_Churrascaria.png'
 
-const menu: Menu[] = [
+const rest: Menu[] = [
   {
-    imagem: imgCarpaccio,
-    titulo: 'Carpaccio de Carne',
-    nota: 4.9,
-    categoria: 'Entrada',
+    imagem: imgDoces,
+    titulo: 'Delicias Doces Café',
+    nota: 4.5,
+    categoria: '',
     descricao:
-      'Finas fatias de carne crua, geralmente carne bovina, temperadas com azeite de trufa, alcaparras, rúcula e queijo parmesão.',
+      'Localizado no coração da cidade, o Delícias Doces Café é um refúgio celestial para os amantes de sobremesas. Este encantador restaurante é especializado em criar experiências culinárias verdadeiramente doces e memoráveis.',
     id: 1
   },
   {
-    imagem: imgSalmao,
-    titulo: 'Salmão Grelhado com Molho de Ervas',
+    imagem: imgSabor,
+    titulo: 'Sabor & Tempero Bistrô',
     nota: 4.9,
-    categoria: 'Prato principal',
+    categoria: '',
     descricao:
-      'Filé de salmão grelhado com um molho de ervas frescas, como dill e salsa, acompanhado de arroz ou vegetais.',
+      'O Sabor & Tempero Bistrô é o epítome da elegância culinária em nossa cidade. Este requintado restaurante combina sofisticação e sabor de uma forma que é verdadeiramente única. Com um ambiente encantador e uma decoração que evoca um charme clássico, este bistrô oferece uma experiência gastronômica inesquecível.',
     id: 2
   },
   {
-    imagem: imgMoussaka,
-    titulo: 'Moussaka',
+    imagem: imgTrattoria,
+    titulo: 'Ristorante La Trattoria',
     nota: 4.8,
-    categoria: 'Prato principal',
+    categoria: '',
     descricao:
-      'Um prato grego em camadas de berinjela, carne moída temperada, molho bechamel e gratinado no forno.',
+      'O Ristorante La Trattoria é um refúgio gastronômico que oferece uma rica variedade de pratos inspirados em diferentes países. Apesar de não ser muito elegante em termos de decoração, este restaurante é um verdadeiro tesouro para os amantes da comida internacional.',
     id: 3
   },
   {
-    imagem: imgTiramisu,
-    titulo: 'Tiramisu',
-    nota: 4.9,
-    categoria: 'Sobremesa',
+    imagem: imgChurrascaria,
+    titulo: 'Fogo & Brasa Churrascaria',
+    nota: 4.6,
+    categoria: '',
     descricao:
-      'Um clássico italiano de camadas de biscoitos de ladyfinger embebidos em café e creme de queijo mascarpone, polvilhado com cacau em pó.',
+      'A Fogo & Brasa Churrascaria é um verdadeiro paraíso para os amantes de carne e churrasco. Com uma atmosfera rústica e acolhedora, este restaurante é o destino perfeito para aqueles que buscam uma experiência de churrasco inigualável.    ',
     id: 4
   }
 ]
 
-const rest: Menu[] = [
+const rest2: Menu[] = [
   {
     imagem: imgDoces,
     titulo: 'Delicias Doces Café',
@@ -90,12 +84,11 @@ const rest: Menu[] = [
   }
 ]
 
-const Home = () => (
+const Restaurantes = () => (
   <>
-    <Banner />
-    <PratosList titulo="Pratos principais" menu={menu} />
-    <PratosList titulo="Restaurantes principais" menu={rest} />
+    <PratosList titulo="Todos os Restaurantes" menu={rest} />
+    <PratosList menu={rest2} />
   </>
 )
 
-export default Home
+export default Restaurantes

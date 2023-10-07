@@ -1,7 +1,8 @@
+import { ReactNode } from 'react'
 import { TagName } from './style'
 
 export type Props = {
-  children: string | number
+  children: ReactNode
   tag: 'normal' | 'bold'
 }
 

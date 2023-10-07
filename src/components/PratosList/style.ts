@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import { cores } from '../../estiloGlobal'
 
+export const PratosLista = styled.div`
+  margin-bottom: 64px;
+`
+
 export const Titulo = styled.div`
   padding: 16px;
   margin-bottom: 10%;
