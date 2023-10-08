@@ -1,6 +1,14 @@
 import Tag from '../Tag'
 
-import { Card, Infos, Titulo, Descricao, ImgMenu, Avaliacao } from './style'
+import {
+  Card,
+  Infos,
+  Titulo,
+  Descricao,
+  ImgMenu,
+  Avaliacao,
+  LinkRest
+} from './style'
 
 import vetorEstrela from '../../assets/images/Vetor_Estrela.png'
 
@@ -13,18 +21,20 @@ type Props = {
 }
 
 const CardPrato = ({ imagem, titulo, nota, categoria, descricao }: Props) => (
-  <Card>
-    <ImgMenu src={imagem} alt={titulo} />
-    <Infos>
-      <Titulo>{titulo}</Titulo>
-      <Tag tag="bold">
-        {nota}
-        <Avaliacao src={vetorEstrela} alt="Avaliação do prato" />
-      </Tag>
-    </Infos>
-    {categoria && <Tag tag="normal">{categoria}</Tag>}
-    <Descricao>{descricao}</Descricao>
-  </Card>
+  <LinkRest to="/restaurante">
+    <Card>
+      <ImgMenu src={imagem} alt={titulo} />
+      <Infos>
+        <Titulo>{titulo}</Titulo>
+        <Tag tag="bold">
+          {nota}
+          <Avaliacao src={vetorEstrela} alt="Avaliação do prato" />
+        </Tag>
+      </Infos>
+      {categoria && <Tag tag="normal">{categoria}</Tag>}
+      <Descricao>{descricao}</Descricao>
+    </Card>
+  </LinkRest>
 )
 
 export default CardPrato

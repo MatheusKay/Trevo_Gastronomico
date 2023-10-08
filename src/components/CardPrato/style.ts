@@ -1,12 +1,17 @@
 import styled from 'styled-components'
 import { cores } from '../../estiloGlobal'
 import { TagName } from '../Tag/style'
+import { Link } from 'react-router-dom'
+
+export const LinkRest = styled(Link)`
+  text-decoration: none;
+  color: ${cores.cinza};
+`
 
 export const Card = styled.div`
   width: 100%;
   padding: 8px;
   background-color: ${cores.vioetaClaro};
-  color: ${cores.cinza};
   border-radius: 12px;
 
   ${TagName} {

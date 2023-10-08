@@ -18,6 +18,7 @@ export const EstiloGlobal = createGlobalStyle`
   body {
     color: ${cores.branco};
     font-family: sans-serif;
+    text-decoration: none;
   }
 
   .container {

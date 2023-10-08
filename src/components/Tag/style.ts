@@ -4,7 +4,7 @@ import { cores } from '../../estiloGlobal'
 import { Props } from '.'
 
 export const TagName = styled.span<Props>`
-  padding: 4px 6px;
+  padding: 6px;
   display: inline-flex;
   align-items: center;
   background-color: ${cores.violeta};

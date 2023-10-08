@@ -6,7 +6,7 @@ import imgSabor from '../../assets/images/imgRest/Rest_Sabor.png'
 import imgTrattoria from '../../assets/images/imgRest/Rest_Trattoria.png'
 import imgChurrascaria from '../../assets/images/imgRest/Rest_Churrascaria.png'
 
-const rest: Menu[] = [
+export const rest: Menu[] = [
   {
     imagem: imgDoces,
     titulo: 'Delicias Doces Café',
