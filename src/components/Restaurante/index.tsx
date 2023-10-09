@@ -12,35 +12,40 @@ import {
 import vetorSabor from '../../assets/images/Sabor_Tempero.png'
 import CardPrato2 from '../CardPrato2.0'
 
-const Restaurante = () => (
+import Menu from '../../models/Cardapio'
+
+type Props = {
+  restaurante: Menu[]
+}
+
+const Restaurante = ({ restaurante }: Props) => (
   <div>
     <BannerRest></BannerRest>
     <div className="container">
-      <LogoRest>
-        <img src={vetorSabor} alt="Logo do Sabor & Temperos" />
-        <Titulo>Sabor & Tempero Bistrô</Titulo>
-      </LogoRest>
-      <ContainerDescRest>
-        <DescRest>
-          O Sabor & Tempero Bistrô é um restaurante acolhedor que traz uma
-          explosão de sabores de todo o mundo para sua mesa. Apesar de não ser
-          muito elegante em termos de decoração, este bistrô é famoso por sua
-          incrível variedade de pratos inspirados em diferentes países.
-        </DescRest>
-      </ContainerDescRest>
-      <ContainerMenu>
-        <Aside>
-          <TituloSec>Entradas</TituloSec>
-          <TituloSec>Pratos principais</TituloSec>
-          <TituloSec>Sobremesas</TituloSec>
-        </Aside>
-        <div>
-          <CardPrato2 />
-          <CardPrato2 />
-          <CardPrato2 />
-          <CardPrato2 />
-        </div>
-      </ContainerMenu>
+      {restaurante.map((rest) => (
+        <>
+          <LogoRest>
+            <img src={rest.imagem} alt={rest.titulo} />
+            <Titulo>{rest.titulo}</Titulo>
+          </LogoRest>
+          <ContainerDescRest>
+            <DescRest>{rest.descricao}</DescRest>
+          </ContainerDescRest>
+          <ContainerMenu>
+            <Aside>
+              <TituloSec>Entradas</TituloSec>
+              <TituloSec>Pratos principais</TituloSec>
+              <TituloSec>Sobremesas</TituloSec>
+            </Aside>
+            <div>
+              <CardPrato2 />
+              <CardPrato2 />
+              <CardPrato2 />
+              <CardPrato2 />
+            </div>
+          </ContainerMenu>
+        </>
+      ))}
     </div>
   </div>
 )

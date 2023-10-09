@@ -1,14 +1,8 @@
+import { useState } from 'react'
+
 import Tag from '../Tag'
 
-import {
-  Card,
-  Infos,
-  Titulo,
-  Descricao,
-  ImgMenu,
-  Avaliacao,
-  LinkRest
-} from './style'
+import { Card, Infos, Titulo, Descricao, ImgMenu, Avaliacao } from './style'
 
 import vetorEstrela from '../../assets/images/Vetor_Estrela.png'
 
@@ -20,9 +14,11 @@ type Props = {
   descricao: string
 }
 
-const CardPrato = ({ imagem, titulo, nota, categoria, descricao }: Props) => (
-  <LinkRest to="/restaurante">
-    <Card>
+const CardPrato = ({ imagem, titulo, nota, categoria, descricao }: Props) => {
+  const [clickCard, setClickCard] = useState('')
+
+  return (
+    <Card onClick={() => setClickCard(titulo)}>
       <ImgMenu src={imagem} alt={titulo} />
       <Infos>
         <Titulo>{titulo}</Titulo>
@@ -34,7 +30,7 @@ const CardPrato = ({ imagem, titulo, nota, categoria, descricao }: Props) => (
       {categoria && <Tag tag="normal">{categoria}</Tag>}
       <Descricao>{descricao}</Descricao>
     </Card>
-  </LinkRest>
-)
+  )
+}
 
 export default CardPrato

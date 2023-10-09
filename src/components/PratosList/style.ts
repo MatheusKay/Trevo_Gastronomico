@@ -1,8 +1,15 @@
 import styled from 'styled-components'
 import { cores } from '../../estiloGlobal'
 
+import { Link } from 'react-router-dom'
+
 export const PratosLista = styled.div`
   margin-bottom: 64px;
+`
+
+export const LinkRest = styled(Link)`
+  text-decoration: none;
+  color: ${cores.cinza};
 `
 
 export const Titulo = styled.h2`
