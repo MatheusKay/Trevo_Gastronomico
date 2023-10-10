@@ -9,7 +9,6 @@ import {
   ContainerDescRest
 } from './style'
 
-import vetorSabor from '../../assets/images/Sabor_Tempero.png'
 import CardPrato2 from '../CardPrato2.0'
 
 import Menu from '../../models/Cardapio'

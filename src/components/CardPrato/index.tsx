@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import Tag from '../Tag'
 
 import { Card, Infos, Titulo, Descricao, ImgMenu, Avaliacao } from './style'
@@ -15,10 +13,8 @@ type Props = {
 }
 
 const CardPrato = ({ imagem, titulo, nota, categoria, descricao }: Props) => {
-  const [clickCard, setClickCard] = useState('')
-
   return (
-    <Card onClick={() => setClickCard(titulo)}>
+    <Card>
       <ImgMenu src={imagem} alt={titulo} />
       <Infos>
         <Titulo>{titulo}</Titulo>
