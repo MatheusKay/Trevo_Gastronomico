@@ -127,7 +127,7 @@ const menu: Menu[] = [
   }
 ]
 
-const filtro = (menuCat: any[], categoria: string) => {
+export const filtro = (menuCat: any[], categoria: string) => {
   return menuCat.filter(
     (prato: { [s: string]: unknown } | ArrayLike<unknown>) => {
       return Object.values(prato).some((valor) => {
@@ -142,12 +142,12 @@ const filtro = (menuCat: any[], categoria: string) => {
 
 const MenuList = () => (
   <>
-    <PratosList titulo="Entradas" menu={filtro(menu, 'Entrada')} />
-    <PratosList
+    {/* <PratosList titulo="Entradas" menu={filtro(menu, 'Entrada')} /> */}
+    {/* <PratosList
       titulo="Pratos principais"
       menu={filtro(menu, 'Prato principal')}
-    />
-    <PratosList titulo="Sobremesas" menu={filtro(menu, 'Sobremesa')} />
+    /> */}
+    {/* <PratosList titulo="Sobremesas" menu={filtro(menu, 'Sobremesa')} /> */}
   </>
 )
 
