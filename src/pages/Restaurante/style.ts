@@ -1,17 +1,12 @@
 import styled from 'styled-components'
 
-import bannerSabor from '../../assets/images/imgRest/Rest_Sabor.png'
 import { cores } from '../../estiloGlobal'
 
-import { Titulo as TituloGeral } from '../PratosList/style'
+import { Titulo as TituloGeral } from '../../components/PratosList/style'
 
 export const BannerRest = styled.div`
   height: 575px;
   margin-top: 70px;
-  background:
-    linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%),
-    url(${bannerSabor}),
-    lightgray 50%;
   background-size: cover;
   background-repeat: no-repeat;
 `
@@ -23,6 +18,14 @@ export const LogoRest = styled.div`
   position: relative;
   z-index: 1;
   color: ${cores.cinza};
+
+  img {
+    max-width: 225px;
+    width: 100%;
+    border-radius: 50%;
+    border: 2px solid black;
+    margin-left: 12px;
+  }
 `
 
 export const ContainerDescRest = styled.div`
@@ -41,11 +44,17 @@ export const Titulo = styled.h2`
 
 export const TituloSec = styled(TituloGeral)`
   font-size: 14px;
+  cursor: pointer;
 `
 
 export const ContainerMenu = styled.div`
   margin-top: 70px;
   display: flex;
+
+  div {
+    max-width: 800px;
+    width: 100%;
+  }
 `
 
 export const Aside = styled.aside`

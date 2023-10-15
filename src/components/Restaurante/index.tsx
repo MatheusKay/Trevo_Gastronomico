@@ -7,24 +7,25 @@ import {
   TituloSec,
   Aside,
   ContainerDescRest
-} from './style'
+} from '../../pages/Restaurante/style'
 
 import CardPrato2 from '../CardPrato2.0'
+import { Rest } from '../../pages/Restaurantes'
 
-import Menu from '../../models/Cardapio'
+// import Menu from '../../models/Cardapio'
 
-type Props = {
-  restaurante: Menu[]
+export type Props = {
+  restaurante: Rest[]
 }
 
 const Restaurante = ({ restaurante }: Props) => (
   <div>
-    <BannerRest></BannerRest>
     <div className="container">
       {restaurante.map((rest) => (
         <>
+          <BannerRest style={{ backgroundImage: rest.capa }}></BannerRest>
           <LogoRest>
-            <img src={rest.imagem} alt={rest.titulo} />
+            <img src={rest.logo} alt={rest.titulo} />
             <Titulo>{rest.titulo}</Titulo>
           </LogoRest>
           <ContainerDescRest>
@@ -36,12 +37,12 @@ const Restaurante = ({ restaurante }: Props) => (
               <TituloSec>Pratos principais</TituloSec>
               <TituloSec>Sobremesas</TituloSec>
             </Aside>
-            <div>
+            {/* <div>
               <CardPrato2 />
               <CardPrato2 />
               <CardPrato2 />
               <CardPrato2 />
-            </div>
+            </div> */}
           </ContainerMenu>
         </>
       ))}

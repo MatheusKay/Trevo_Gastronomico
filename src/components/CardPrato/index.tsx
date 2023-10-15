@@ -10,11 +10,19 @@ type Props = {
   nota: number
   categoria?: string
   descricao: string
+  id: number
 }
 
-const CardPrato = ({ imagem, titulo, nota, categoria, descricao }: Props) => {
+const CardPrato = ({
+  imagem,
+  titulo,
+  nota,
+  categoria,
+  descricao,
+  id
+}: Props) => {
   return (
-    <Card>
+    <Card to={`/restaurante/${id}`}>
       <ImgMenu src={imagem} alt={titulo} />
       <Infos>
         <Titulo>{titulo}</Titulo>

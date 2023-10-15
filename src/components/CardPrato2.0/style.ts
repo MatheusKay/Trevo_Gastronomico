@@ -21,6 +21,10 @@ export const Card = styled.div`
     color: ${cores.branco};
     margin-top: 12px;
   }
+
+  div {
+    width: 100%;
+  }
 `
 
 export const InfosCard = styled.div`

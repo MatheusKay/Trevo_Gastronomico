@@ -1,22 +1,23 @@
 import { Card, InfosCard, ValorCard, BotaoCard, DescCard } from './style'
 
-import imgRolinho from '../../assets/images/ImgPratos/Rolinhos_Primavera.png'
 import Tag from '../Tag'
 
-const CardPrato2 = () => (
+type Props = {
+  imagem: string
+  titulo: string
+  preco: number
+  descricao: string
+}
+
+const CardPrato2 = ({ descricao, imagem, preco, titulo }: Props) => (
   <Card>
-    <img src={imgRolinho} alt="" />
+    <img src={imagem} alt={titulo} />
     <div>
       <InfosCard>
-        <h3>Nome do prato</h3>
-        <ValorCard>R$ 79,99</ValorCard>
+        <h3>{titulo}</h3>
+        <ValorCard>{preco}</ValorCard>
       </InfosCard>
-      <DescCard>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-        autem itaque minus non eius vitae adipisci doloribus facere, officiis
-        sequi amet alias dolorum? Atque necessitatibus vitae, commodi quo
-        deleniti incidunt.
-      </DescCard>
+      <DescCard>{descricao}</DescCard>
       <BotaoCard>
         <Tag tag="bold">Adicionar ao carrinho</Tag>
       </BotaoCard>
