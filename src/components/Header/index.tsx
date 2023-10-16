@@ -11,29 +11,31 @@ import {
   ContainerCarrinho
 } from './style'
 
-const Header = () => (
-  <Cabecalho>
-    <ContainerHeader>
-      <Link to="/">
-        <img src={logo} alt="Trevo da gastronomia" />
-      </Link>
-      <Links>
-        <li>
-          <Link to="/restaurantes">Restaurantes</Link>
-        </li>
-        <li>
-          <Link to="/menu">Menu</Link>
-        </li>
-        <li>
-          <a href="">Destaques</a>
-        </li>
-      </Links>
-    </ContainerHeader>
-    <ContainerCarrinho>
-      <NumCarrinho>0</NumCarrinho>
-      <img src={carrinho} alt="Carrinho" />
-    </ContainerCarrinho>
-  </Cabecalho>
-)
+const Header = () => {
+  return (
+    <Cabecalho>
+      <ContainerHeader>
+        <Link to="/">
+          <img src={logo} alt="Trevo da gastronomia" />
+        </Link>
+        <Links>
+          <li>
+            <Link to="/restaurantes">Restaurantes</Link>
+          </li>
+          <li>
+            <Link to="/menu">Menu</Link>
+          </li>
+          <li>
+            <a href="">Destaques</a>
+          </li>
+        </Links>
+      </ContainerHeader>
+      <ContainerCarrinho>
+        <NumCarrinho>0</NumCarrinho>
+        <img src={carrinho} alt="Carrinho" />
+      </ContainerCarrinho>
+    </Cabecalho>
+  )
+}
 
 export default Header

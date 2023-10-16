@@ -36,42 +36,44 @@ const PagRestaurante = () => {
   )
 
   return (
-    <div className="container">
+    <>
       <BannerRest style={{ backgroundImage: `url(${restaurante.capa})` }} />
-      <LogoRest>
-        <img src={restaurante.logo} alt={restaurante.titulo} />
-        <Titulo>{restaurante.titulo}</Titulo>
-      </LogoRest>
-      <ContainerDescRest>
-        <DescRest>{restaurante.descricao}</DescRest>
-      </ContainerDescRest>
-      <ContainerMenu>
-        <Aside>
-          <TituloSec onClick={() => setCategoria('Entrada')}>
-            Entradas
-          </TituloSec>
-          <TituloSec onClick={() => setCategoria('Prato principal')}>
-            Pratos principais
-          </TituloSec>
-          <TituloSec onClick={() => setCategoria('Sobremesa')}>
-            Sobremesas
-          </TituloSec>
-        </Aside>
-        <div>
-          {filtroMenu.map((item) => (
-            <>
-              <CardPrato2
-                descricao={item.descricao}
-                imagem={item.foto}
-                preco={item.preco}
-                titulo={item.nome}
-                key={item.id}
-              />
-            </>
-          ))}
-        </div>
-      </ContainerMenu>
-    </div>
+      <div className="container">
+        <LogoRest>
+          <img src={restaurante.logo} alt={restaurante.titulo} />
+          <Titulo>{restaurante.titulo}</Titulo>
+        </LogoRest>
+        <ContainerDescRest>
+          <DescRest>{restaurante.descricao}</DescRest>
+        </ContainerDescRest>
+        <ContainerMenu>
+          <Aside>
+            <TituloSec onClick={() => setCategoria('Entrada')}>
+              Entradas
+            </TituloSec>
+            <TituloSec onClick={() => setCategoria('Prato principal')}>
+              Pratos principais
+            </TituloSec>
+            <TituloSec onClick={() => setCategoria('Sobremesa')}>
+              Sobremesas
+            </TituloSec>
+          </Aside>
+          <div>
+            {filtroMenu.map((item) => (
+              <>
+                <CardPrato2
+                  descricao={item.descricao}
+                  imagem={item.foto}
+                  preco={item.preco}
+                  titulo={item.nome}
+                  key={item.id}
+                />
+              </>
+            ))}
+          </div>
+        </ContainerMenu>
+      </div>
+    </>
   )
 }
 

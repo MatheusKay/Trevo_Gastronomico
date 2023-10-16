@@ -7,8 +7,19 @@ import { Titulo as TituloGeral } from '../../components/PratosList/style'
 export const BannerRest = styled.div`
   height: 575px;
   margin-top: 70px;
+  position: relative;
   background-size: cover;
   background-repeat: no-repeat;
+
+  &::after {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    content: '';
+  }
 `
 
 export const LogoRest = styled.div`
@@ -24,7 +35,6 @@ export const LogoRest = styled.div`
     width: 100%;
     border-radius: 50%;
     border: 2px solid black;
-    margin-left: 12px;
   }
 `
 

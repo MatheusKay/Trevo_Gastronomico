@@ -5,8 +5,18 @@ export const cores = {
   violeta: '#6C404C',
   vioetaClaro: '#DCA8B5',
   violetaGradi: '#C08E9B',
-  cinza: '#333333'
+  cinza: '#333333',
+  fundo: '#EEEEEE'
 }
+
+//  Cores para o tipo dark do site
+
+// branco: '#333333',
+// violeta: '#DCA8B5',
+// vioetaClaro: '#6C404C',
+// violetaGradi: '#C08E9B',
+// cinza: '#EEEEEE',
+// fundo: '#333333'
 
 export const EstiloGlobal = createGlobalStyle`
   * {
@@ -17,6 +27,7 @@ export const EstiloGlobal = createGlobalStyle`
 
   body {
     color: ${cores.branco};
+    background-color: ${cores.fundo};
     font-family: sans-serif;
     text-decoration: none;
   }
