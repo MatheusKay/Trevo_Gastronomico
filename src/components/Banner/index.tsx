@@ -1,11 +1,14 @@
+import { Link } from 'react-router-dom'
+
 import { Imagem, ContainerRest, Titulo } from './style'
 
-import restDoces from '../../assets/images/Doces_Cafe.png'
-import restSabor from '../../assets/images/Sabor_Tempero.png'
-import restTrattoria from '../../assets/images/Ristorante_Trattoria.png'
-import restFogo from '../../assets/images/Fogo_Brasa.png'
+import { Rest } from '../../pages/Restaurantes'
 
-const Banner = () => (
+type Props = {
+  imagens: Rest[]
+}
+
+const Banner = ({ imagens }: Props) => (
   <Imagem>
     <div className="container">
       <Titulo>
@@ -14,10 +17,11 @@ const Banner = () => (
       </Titulo>
     </div>
     <ContainerRest>
-      <img src={restDoces} alt="" />
-      <img src={restSabor} alt="" />
-      <img src={restTrattoria} alt="" />
-      <img src={restFogo} alt="" />
+      {imagens.map((imagem) => (
+        <Link to={`/restaurante/${imagem.id}`} key={imagem.id}>
+          <img src={imagem.logo} alt={imagem.titulo} />
+        </Link>
+      ))}
     </ContainerRest>
   </Imagem>
 )

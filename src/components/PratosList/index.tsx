@@ -1,15 +1,23 @@
-import CardPrato from '../CardPrato'
+import { useEffect, useState } from 'react'
 
+import CardPrato from '../CardPrato'
 import { Titulo, List, PratosLista } from './style'
 
-import { Menu } from '../../pages/Restaurantes'
+import { Menu, Rest } from '../../pages/Restaurantes'
 
 type Props = {
   titulo?: string
   menu?: Menu[]
+  restID?: Rest[]
 }
 
-const PratosList = ({ titulo, menu }: Props) => {
+const filtro = (menuCat: Rest[], categoria: string) => {
+  return menuCat.flatMap((item) =>
+    item.cardapio.filter((menu) => menu.categoria === categoria)
+  )
+}
+
+const PratosList = ({ titulo, menu, restID }: Props) => {
   return (
     <PratosLista>
       <div className="container">

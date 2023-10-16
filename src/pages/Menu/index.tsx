@@ -20,12 +20,21 @@ const MenuList = () => {
 
   return (
     <>
-      <PratosList titulo="Entradas" menu={filtro(filtroMenu, 'Entrada')} />
       <PratosList
+        restID={restaurantes}
+        titulo="Entradas"
+        menu={filtro(filtroMenu, 'Entrada')}
+      />
+      <PratosList
+        restID={restaurantes}
         titulo="Pratos principais"
         menu={filtro(filtroMenu, 'Prato principal')}
       />
-      <PratosList titulo="Sobremesas" menu={filtro(filtroMenu, 'Sobremesa')} />
+      <PratosList
+        restID={restaurantes}
+        titulo="Sobremesas"
+        menu={filtro(filtroMenu, 'Sobremesa')}
+      />
     </>
   )
 }

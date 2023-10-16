@@ -4,7 +4,8 @@ import { cores } from '../../estiloGlobal'
 import { TagName } from '../Tag/style'
 
 export const Card = styled.div`
-  max-height: 130px;
+  max-height: 120px;
+  height: 100%;
   width: 100%;
   padding: 16px;
   margin-bottom: 8px;

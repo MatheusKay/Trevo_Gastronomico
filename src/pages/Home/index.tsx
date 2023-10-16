@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <>
-      <Banner />
+      <Banner imagens={filtroRest} />
       <PratosList titulo="Pratos principais" menu={menuRest} />
       <RestList titulo="Restaurantes principais" rest={filtroRest} />
     </>

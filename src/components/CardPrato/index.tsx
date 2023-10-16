@@ -22,7 +22,7 @@ const CardPrato = ({
   id
 }: Props) => {
   return (
-    <Card to={`/restaurante/${id}`}>
+    <Card>
       <ImgMenu src={imagem} alt={titulo} />
       <Infos>
         <Titulo>{titulo}</Titulo>
