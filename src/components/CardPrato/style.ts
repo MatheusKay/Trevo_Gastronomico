@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 
 import { cores } from '../../estiloGlobal'
 import { TagName } from '../Tag/style'
@@ -10,6 +9,7 @@ export const Card = styled.div`
   background-color: ${cores.vioetaClaro};
   border-radius: 12px;
   color: ${cores.cinza};
+  cursor: pointer;
 
   ${TagName} {
     color: ${cores.branco};

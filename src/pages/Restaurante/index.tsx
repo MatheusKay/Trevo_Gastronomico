@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
+import { formaPreco } from '../../components/PratosList'
 import { Rest } from '../Restaurantes'
 
 import {
@@ -64,7 +65,7 @@ const PagRestaurante = () => {
                 <CardPrato2
                   descricao={item.descricao}
                   imagem={item.foto}
-                  preco={item.preco}
+                  preco={formaPreco(item.preco)}
                   titulo={item.nome}
                   key={item.id}
                 />

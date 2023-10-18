@@ -5,7 +5,7 @@ import Tag from '../Tag'
 type Props = {
   imagem: string
   titulo: string
-  preco: number
+  preco: string
   descricao: string
 }
 
