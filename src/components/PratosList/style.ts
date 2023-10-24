@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { cores } from '../../estiloGlobal'
-
 import { Link } from 'react-router-dom'
+
+import { cores } from '../../estiloGlobal'
 import { TagName } from '../Tag/style'
 
 export const PratosLista = styled.div`
@@ -110,10 +110,6 @@ export const Modal = styled.div`
     display: flex;
     justify-content: end;
     align-items: end;
-
-    ${TagName} {
-      margin: 0;
-    }
   }
 
   .overlay {

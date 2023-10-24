@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import { formaPreco } from '../../components/PratosList'
-import { Rest } from '../Restaurantes'
 
 import {
   BannerRest,
@@ -16,17 +16,17 @@ import {
 } from './style'
 import CardPrato2 from '../../components/CardPrato2.0'
 
+import { useGetRestauranteQuery } from '../../services/api'
+import { abrir, addMenu } from '../../store/reducers/carrinho'
+import { Menu } from '../Restaurantes'
+
 const PagRestaurante = () => {
+  const dispatch = useDispatch()
+
   const { id } = useParams()
 
-  const [restaurante, setRestaurante] = useState<Rest>()
   const [categoria, setCategoria] = useState('Entrada')
-
-  useEffect(() => {
-    fetch(`https://fake-api-rose.vercel.app/api/efood/restaurantes/${id}`).then(
-      (res) => res.json().then((res) => setRestaurante(res))
-    )
-  }, [id])
+  const { data: restaurante } = useGetRestauranteQuery(id!)
 
   if (!restaurante) {
     return <p>Carregando...</p>
@@ -35,6 +35,11 @@ const PagRestaurante = () => {
   const filtroMenu = restaurante.cardapio.filter(
     (item) => item.categoria === categoria
   )
+
+  const addPrato = (item: Menu) => {
+    dispatch(addMenu(item))
+    dispatch(abrir())
+  }
 
   return (
     <>
@@ -61,15 +66,14 @@ const PagRestaurante = () => {
           </Aside>
           <div>
             {filtroMenu.map((item) => (
-              <>
+              <div onClick={() => addPrato(item)} key={item.id}>
                 <CardPrato2
                   descricao={item.descricao}
                   imagem={item.foto}
                   preco={formaPreco(item.preco)}
                   titulo={item.nome}
-                  key={item.id}
                 />
-              </>
+              </div>
             ))}
           </div>
         </ContainerMenu>

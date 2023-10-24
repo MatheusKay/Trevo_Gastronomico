@@ -1,33 +1,35 @@
-import { useState, useEffect } from 'react'
-
 import PratosList from '../../components/PratosList'
-import { Menu, Rest } from '../Restaurantes'
+import { Menu } from '../Restaurantes'
+import { useGetRestaurantesQuery } from '../../services/api'
 
 const MenuList = () => {
-  const [restaurantes, setRestaurantes] = useState<Rest[]>([])
+  const { data: restaurantes } = useGetRestaurantesQuery()
 
-  useEffect(() => {
-    fetch('https://fake-api-rose.vercel.app/api/efood/restaurantes').then(
-      (res) => res.json().then((res) => setRestaurantes(res))
+  if (restaurantes) {
+    const filtroMenu = restaurantes.flatMap(
+      (restaurante) => restaurante.cardapio
     )
-  }, [])
 
-  const filtroMenu = restaurantes.flatMap((restaurante) => restaurante.cardapio)
+    const filtro = (menuCat: Menu[], categoria: string) => {
+      return menuCat.filter((item) => item.categoria === categoria)
+    }
 
-  const filtro = (menuCat: Menu[], categoria: string) => {
-    return menuCat.filter((item) => item.categoria === categoria)
+    return (
+      <>
+        <PratosList titulo="Entradas" menu={filtro(filtroMenu, 'Entrada')} />
+        <PratosList
+          titulo="Pratos principais"
+          menu={filtro(filtroMenu, 'Prato principal')}
+        />
+        <PratosList
+          titulo="Sobremesas"
+          menu={filtro(filtroMenu, 'Sobremesa')}
+        />
+      </>
+    )
   }
 
-  return (
-    <>
-      <PratosList titulo="Entradas" menu={filtro(filtroMenu, 'Entrada')} />
-      <PratosList
-        titulo="Pratos principais"
-        menu={filtro(filtroMenu, 'Prato principal')}
-      />
-      <PratosList titulo="Sobremesas" menu={filtro(filtroMenu, 'Sobremesa')} />
-    </>
-  )
+  return <h4>Carregando...</h4>
 }
 
 export default MenuList

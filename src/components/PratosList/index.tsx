@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 import CardPrato from '../CardPrato'
 import Tag from '../Tag'
@@ -8,20 +9,24 @@ import vetorEstrela from '../../assets/images/Vetor_Estrela.png'
 import vetorFechar from '../../assets/images/fechar.png'
 
 import { Menu } from '../../pages/Restaurantes'
+import { Botao } from '../../estiloGlobal'
+
+import { addModal, abrir } from '../../store/reducers/carrinho'
 
 type Props = {
   titulo?: string
   menu?: Menu[]
 }
 
-type Modal = {
-  estaVisivel: boolean
-  url: string
-  titulo: string
+export type Modal = {
+  estaVisivel?: boolean
+  url?: string
+  titulo?: string
   descricao: string
   categoria: string
   nota: number
   preco: number
+  id: number
 }
 
 export const formaPreco = (preco = 0) => {
@@ -39,7 +44,8 @@ const PratosList = ({ titulo, menu }: Props) => {
     descricao: '',
     titulo: '',
     nota: 0,
-    preco: 0
+    preco: 0,
+    id: 0
   })
 
   const fecharModal = () => {
@@ -50,8 +56,17 @@ const PratosList = ({ titulo, menu }: Props) => {
       descricao: '',
       titulo: '',
       nota: 0,
-      preco: 0
+      preco: 0,
+      id: 0
     })
+  }
+
+  const dispatch = useDispatch()
+
+  const addCarrinho = () => {
+    dispatch(addModal(modal))
+    dispatch(abrir())
+    fecharModal()
   }
 
   return (
@@ -72,7 +87,8 @@ const PratosList = ({ titulo, menu }: Props) => {
                       categoria: menu.categoria,
                       descricao: menu.descricao,
                       nota: menu.nota,
-                      preco: menu.preco
+                      preco: menu.preco,
+                      id: menu.id
                     })
                   }}
                 >
@@ -117,7 +133,7 @@ const PratosList = ({ titulo, menu }: Props) => {
               </div>
               <p>{modal.descricao}</p>
               <div className="container-button">
-                <Tag tag="bold">Adicionar ao carrinho</Tag>
+                <Botao onClick={addCarrinho}>Adicionar ao carrinho</Botao>
               </div>
             </div>
           </div>

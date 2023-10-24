@@ -1,6 +1,6 @@
 import { Card, InfosCard, ValorCard, BotaoCard, DescCard } from './style'
 
-import Tag from '../Tag'
+import { Botao } from '../../estiloGlobal'
 
 type Props = {
   imagem: string
@@ -19,7 +19,7 @@ const CardPrato2 = ({ descricao, imagem, preco, titulo }: Props) => (
       </InfosCard>
       <DescCard>{descricao}</DescCard>
       <BotaoCard>
-        <Tag tag="bold">Adicionar ao carrinho</Tag>
+        <Botao type="button">Adicionar ao carrinho</Botao>
       </BotaoCard>
     </div>
   </Card>

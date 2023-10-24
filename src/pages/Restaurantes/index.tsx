@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
-
 import RestList from '../../components/RestList'
+import { useGetRestaurantesQuery } from '../../services/api'
 
 export type Rest = {
   id: number
@@ -31,13 +30,7 @@ export type Menu = {
 }
 
 const Restaurantes = () => {
-  const [restaurantes, setRestaurantes] = useState<Rest[]>([])
-
-  useEffect(() => {
-    fetch('https://fake-api-rose.vercel.app/api/efood/restaurantes').then(
-      (res) => res.json().then((res) => setRestaurantes(res))
-    )
-  }, [])
+  const { data: restaurantes } = useGetRestaurantesQuery()
 
   return (
     <>

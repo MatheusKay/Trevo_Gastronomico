@@ -34,6 +34,10 @@ export const Links = styled.ul`
 export const ContainerCarrinho = styled.a`
   margin-right: 16px;
   position: relative;
+
+  img {
+    cursor: pointer;
+  }
 `
 
 export const NumCarrinho = styled.span`

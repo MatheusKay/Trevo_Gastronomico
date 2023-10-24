@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 export const cores = {
   branco: '#EEEEEE',
@@ -37,4 +37,18 @@ export const EstiloGlobal = createGlobalStyle`
     width: 100%;
     margin: 0 auto;
   }
+`
+
+export const Botao = styled.button`
+  padding: 6px;
+  display: flex;
+  justify-content: end;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: ${cores.branco};
+  background-color: ${cores.violeta};
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
 `

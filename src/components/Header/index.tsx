@@ -1,3 +1,4 @@
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import logo from '../../assets/images/Vetor_Logo.png'
@@ -11,7 +12,15 @@ import {
   ContainerCarrinho
 } from './style'
 
+import { RootReducer } from '../../store'
+import { abrir } from '../../store/reducers/carrinho'
+
 const Header = () => {
+  const { itens, itensMenu } = useSelector(
+    (state: RootReducer) => state.carrinho
+  )
+  const dispatch = useDispatch()
+
   return (
     <Cabecalho>
       <ContainerHeader>
@@ -31,8 +40,8 @@ const Header = () => {
         </Links>
       </ContainerHeader>
       <ContainerCarrinho>
-        <NumCarrinho>0</NumCarrinho>
-        <img src={carrinho} alt="Carrinho" />
+        <NumCarrinho>{itens.length + itensMenu.length}</NumCarrinho>
+        <img onClick={() => dispatch(abrir())} src={carrinho} alt="Carrinho" />
       </ContainerCarrinho>
     </Cabecalho>
   )
