@@ -8,6 +8,7 @@ import { RootReducer } from '../../store'
 import { fechar } from '../../store/reducers/carrinho'
 import { formaPreco } from '../PratosList'
 import CarrinhoItem from '../CarrinhoItem'
+import { Menu } from '../../pages/Restaurantes'
 
 const Carrinho = () => {
   const { estaAberto, itens, itensMenu } = useSelector(
@@ -15,11 +16,19 @@ const Carrinho = () => {
   )
   const dispatch = useDispatch()
 
-  const precoTotal = () => {
+  const precoDoMenu = () => {
+    return itensMenu.reduce((acumulador, valorAtual) => {
+      return (acumulador += valorAtual.preco!)
+    }, 0)
+  }
+
+  const precoDoSite = () => {
     return itens.reduce((acumulador, valorAtual) => {
       return (acumulador += valorAtual.preco!)
     }, 0)
   }
+
+  const precoTotal = precoDoSite() + precoDoMenu()
 
   return (
     <CarrinhoContainer className={estaAberto ? 'is-open' : ''}>
@@ -49,7 +58,7 @@ const Carrinho = () => {
         </ul>
         <InfosItem>
           <p>Valor total</p>
-          <span>{formaPreco(precoTotal())}</span>
+          <span>{formaPreco(precoTotal)}</span>
         </InfosItem>
         <Botao type="button">Continuar com a compra</Botao>
       </BarraLateral>

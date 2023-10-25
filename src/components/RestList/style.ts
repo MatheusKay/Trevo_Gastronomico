@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../estiloGlobal'
+import { breakpoints, cores } from '../../estiloGlobal'
 
 import { Link } from 'react-router-dom'
 
@@ -27,4 +27,8 @@ export const List = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
+
+  @media (max-width: ${breakpoints.descktop}) {
+    grid-template-columns: 1fr 1fr;
+  }
 `

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import { cores } from '../../estiloGlobal'
+import { breakpoints, cores } from '../../estiloGlobal'
 import { TagName } from '../Tag/style'
 
 export const PratosLista = styled.div`
@@ -28,6 +28,10 @@ export const List = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
+
+  @media (max-width: ${breakpoints.descktop}) {
+    grid-template-columns: 1fr 1fr;
+  }
 `
 
 export const Modal = styled.div`
@@ -49,6 +53,10 @@ export const Modal = styled.div`
     margin: 0 auto;
     z-index: 1;
 
+    @media (max-width: ${breakpoints.descktop}) {
+      width: 90%;
+    }
+
     header {
       margin-bottom: 8px;
       display: flex;
@@ -61,7 +69,7 @@ export const Modal = styled.div`
     }
 
     .container-card {
-      height: 220px;
+      height: 250px;
 
       padding: 16px;
       position: relative;
@@ -71,6 +79,7 @@ export const Modal = styled.div`
       > img {
         width: 280px;
         margin-right: 16px;
+        object-fit: cover;
       }
 
       > div {
@@ -90,6 +99,10 @@ export const Modal = styled.div`
 
     p {
       max-width: 80%;
+
+      @media (max-width: ${breakpoints.descktop}) {
+        max-width: 100%;
+      }
     }
   }
 
@@ -100,13 +113,14 @@ export const Modal = styled.div`
 
     span {
       font-weight: bold;
+      margin-left: 8px;
     }
   }
 
   .container-button {
     position: absolute;
     bottom: 0;
-    right: 16px;
+    right: 0;
     display: flex;
     justify-content: end;
     align-items: end;

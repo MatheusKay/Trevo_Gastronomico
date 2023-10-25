@@ -18,6 +18,11 @@ export const cores = {
 // cinza: '#EEEEEE',
 // fundo: '#333333'
 
+export const breakpoints = {
+  tablet: '767px',
+  descktop: '1024px'
+}
+
 export const EstiloGlobal = createGlobalStyle`
   * {
     margin: 0;
@@ -36,6 +41,10 @@ export const EstiloGlobal = createGlobalStyle`
     max-width: 1024px;
     width: 100%;
     margin: 0 auto;
+
+    @media (max-width: ${breakpoints.descktop}) {
+      width: 80%;
+    }
   }
 `
 

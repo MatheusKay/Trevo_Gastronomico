@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { cores } from '../../estiloGlobal'
+import { breakpoints, cores } from '../../estiloGlobal'
 
 import { Titulo as TituloGeral } from '../../components/PratosList/style'
 
@@ -50,6 +50,10 @@ export const DescRest = styled.p`
 export const Titulo = styled.h2`
   margin-left: 125px;
   font-size: 24px;
+
+  @media (max-width: ${breakpoints.descktop}) {
+    margin: 0;
+  }
 `
 
 export const TituloSec = styled(TituloGeral)`

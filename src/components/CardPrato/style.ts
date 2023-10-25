@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { cores } from '../../estiloGlobal'
+import { breakpoints, cores } from '../../estiloGlobal'
 import { TagName } from '../Tag/style'
 
 export const Card = styled.div`
@@ -19,6 +19,7 @@ export const Card = styled.div`
 export const ImgMenu = styled.img`
   width: 100%;
   height: 164px;
+  object-fit: cover;
 `
 
 export const Infos = styled.div`
@@ -51,6 +52,11 @@ export const Descricao = styled.p`
   max-width: 222px;
   margin-top: 16px;
   font-size: 14px;
+
+  @media (max-width: ${breakpoints.descktop}) {
+    max-width: 100%;
+    width: 100%;
+  }
 `
 
 export const Avaliacao = styled.img`
