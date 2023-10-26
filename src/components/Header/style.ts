@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { cores } from '../../estiloGlobal'
+import { breakpoints, cores } from '../../estiloGlobal'
 
 export const Cabecalho = styled.header`
   padding: 16px;
@@ -11,6 +11,10 @@ export const Cabecalho = styled.header`
   background-color: ${cores.violeta};
   border-radius: 12px;
   color: ${cores.branco};
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: none;
+  }
 `
 
 export const ContainerHeader = styled.div`
