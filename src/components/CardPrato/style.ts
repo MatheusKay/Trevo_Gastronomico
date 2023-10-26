@@ -42,7 +42,7 @@ export const Titulo = styled.h3`
 `
 
 export const Descricao = styled.p`
-  line-height: 22px; /* Altura de linha desejada */
+  line-height: 22px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

@@ -17,6 +17,11 @@ export const Card = styled.div`
     width: 130px;
     margin-right: 16px;
     object-fit: cover;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      width: 100%;
+      max-height: 225px;
+    }
   }
 
   ${TagName} {
@@ -32,6 +37,12 @@ export const Card = styled.div`
   @media (max-width: ${breakpoints.descktop}) {
     max-height: 200px;
   }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    max-height: none;
+    height: auto;
+    flex-direction: column;
+  }
 `
 
 export const InfosCard = styled.div`
@@ -41,6 +52,10 @@ export const InfosCard = styled.div`
   justify-content: space-between;
   column-gap: 5px;
   font-size: 16px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    margin-top: 8px;
+  }
 `
 
 export const ValorCard = styled.span`

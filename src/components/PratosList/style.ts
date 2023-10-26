@@ -22,6 +22,10 @@ export const Titulo = styled.h2`
   background-color: ${cores.violeta};
   border-radius: 12px;
   text-align: center;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 8px 16px;
+  }
 `
 
 export const List = styled.div`
@@ -31,6 +35,10 @@ export const List = styled.div`
 
   @media (max-width: ${breakpoints.descktop}) {
     grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: 1fr;
   }
 `
 
@@ -69,10 +77,8 @@ export const Modal = styled.div`
     }
 
     .container-card {
-      height: 250px;
-
+      height: 225px;
       padding: 16px;
-      position: relative;
       display: flex;
       background-color: ${cores.vioetaClaro};
 
@@ -80,11 +86,24 @@ export const Modal = styled.div`
         width: 280px;
         margin-right: 16px;
         object-fit: cover;
+
+        @media (max-width: ${breakpoints.tablet}) {
+          width: 100%;
+          max-height: 225px;
+        }
       }
 
       > div {
         width: 100%;
         position: relative;
+      }
+
+      @media (max-width: ${breakpoints.tablet}) {
+        flex-direction: column;
+      }
+
+      @media (max-width: ${breakpoints.tablet}) {
+        height: auto;
       }
     }
 
@@ -99,9 +118,14 @@ export const Modal = styled.div`
 
     p {
       max-width: 80%;
+      line-height: 22px;
 
       @media (max-width: ${breakpoints.descktop}) {
         max-width: 100%;
+      }
+
+      @media (max-width: ${breakpoints.tablet}) {
+        margin-bottom: 15%;
       }
     }
   }
@@ -114,6 +138,10 @@ export const Modal = styled.div`
     span {
       font-weight: bold;
       margin-left: 8px;
+    }
+
+    @media (max-width: ${breakpoints.tablet}) {
+      margin-top: 8px;
     }
   }
 

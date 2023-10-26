@@ -36,10 +36,17 @@ export const LogoRest = styled.div`
     border-radius: 50%;
     border: 2px solid black;
   }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    flex-direction: column;
+    align-items: center;
+    row-gap: 8px;
+  }
 `
 
 export const ContainerDescRest = styled.div`
   margin-top: 70px;
+  line-height: 24px;
 `
 
 export const DescRest = styled.p`
@@ -59,6 +66,12 @@ export const Titulo = styled.h2`
 export const TituloSec = styled(TituloGeral)`
   font-size: 14px;
   cursor: pointer;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+  }
 `
 
 export const ContainerMenu = styled.div`
@@ -69,6 +82,10 @@ export const ContainerMenu = styled.div`
     max-width: 800px;
     width: 100%;
   }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    flex-direction: column;
+  }
 `
 
 export const Aside = styled.aside`
@@ -76,4 +93,10 @@ export const Aside = styled.aside`
   margin-right: 24px;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: auto;
+    flex-direction: row;
+    column-gap: 8px;
+  }
 `

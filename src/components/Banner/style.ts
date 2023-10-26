@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../estiloGlobal'
+import { breakpoints, cores } from '../../estiloGlobal'
 
 export const Imagem = styled.div`
   height: 575px;
@@ -22,6 +22,10 @@ export const Titulo = styled.h1`
   span {
     font-weight: bold;
   }
+
+  @media (max-width: ${breakpoints.descktop}) {
+    font-size: 24px;
+  }
 `
 
 export const ContainerRest = styled.div`
@@ -31,5 +35,10 @@ export const ContainerRest = styled.div`
   img {
     height: 150px;
     border-radius: 18px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    flex-wrap: wrap;
+    row-gap: 8px;
   }
 `

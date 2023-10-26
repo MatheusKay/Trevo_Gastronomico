@@ -21,6 +21,10 @@ export const Titulo = styled.h2`
   background-color: ${cores.violeta};
   border-radius: 12px;
   text-align: center;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 8px 16px;
+  }
 `
 
 export const List = styled.div`
@@ -30,5 +34,9 @@ export const List = styled.div`
 
   @media (max-width: ${breakpoints.descktop}) {
     grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: 1fr;
   }
 `

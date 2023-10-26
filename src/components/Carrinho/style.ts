@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Botao, cores } from '../../estiloGlobal'
+import { Botao, breakpoints, cores } from '../../estiloGlobal'
 
 export const CarrinhoContainer = styled.div`
   width: 100%;
@@ -40,6 +40,10 @@ export const BarraLateral = styled.aside`
     background-color: ${cores.vioetaClaro};
     color: ${cores.cinza};
     font-size: 14px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 80%;
   }
 `
 
