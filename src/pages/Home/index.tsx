@@ -20,7 +20,11 @@ const Home = () => {
     return (
       <>
         <Banner imagens={filtroRest} />
-        <PratosList titulo="Pratos principais" menu={menuRest} />
+        <PratosList
+          titulo="Pratos principais"
+          menu={menuRest}
+          id="pratos-principais"
+        />
         <RestList titulo="Restaurantes principais" rest={filtroRest} />
       </>
     )

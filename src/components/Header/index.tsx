@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link'
 
 import logo from '../../assets/images/Vetor_Logo.png'
 import carrinho from '../../assets/images/shopping-cart 1.svg'
@@ -24,18 +24,18 @@ const Header = () => {
   return (
     <Cabecalho>
       <ContainerHeader>
-        <Link to="/">
+        <HashLink to="/">
           <img src={logo} alt="Trevo da gastronomia" />
-        </Link>
+        </HashLink>
         <Links>
           <li>
-            <Link to="/restaurantes">Restaurantes</Link>
+            <HashLink to="/restaurantes">Restaurantes</HashLink>
           </li>
           <li>
-            <Link to="/menu">Menu</Link>
+            <HashLink to="/menu">Menu</HashLink>
           </li>
           <li>
-            <a href="">Destaques</a>
+            <HashLink to="/#pratos-principais">Destaques</HashLink>
           </li>
         </Links>
       </ContainerHeader>

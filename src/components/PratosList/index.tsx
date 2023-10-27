@@ -16,6 +16,7 @@ import { addModal, abrir } from '../../store/reducers/carrinho'
 type Props = {
   titulo?: string
   menu?: Menu[]
+  id?: string
 }
 
 export type Modal = {
@@ -36,7 +37,7 @@ export const formaPreco = (preco = 0) => {
   }).format(preco)
 }
 
-const PratosList = ({ titulo, menu }: Props) => {
+const PratosList = ({ titulo, menu, id }: Props) => {
   const [modal, setModal] = useState<Modal>({
     estaVisivel: false,
     url: '',
@@ -71,7 +72,7 @@ const PratosList = ({ titulo, menu }: Props) => {
 
   return (
     <>
-      <S.PratosLista>
+      <S.PratosLista id={id}>
         <div className="container">
           {titulo && <S.Titulo>{titulo}</S.Titulo>}
           <S.List>
