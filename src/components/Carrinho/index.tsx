@@ -9,6 +9,7 @@ import { fechar } from '../../store/reducers/carrinho'
 import { formaPreco } from '../PratosList'
 import CarrinhoItem from '../CarrinhoItem'
 import { Menu } from '../../pages/Restaurantes'
+import CadastroPagemnto from '../CadastroPagamento'
 
 const Carrinho = () => {
   const { estaAberto, itens, itensMenu } = useSelector(
@@ -34,7 +35,7 @@ const Carrinho = () => {
     <CarrinhoContainer className={estaAberto ? 'is-open' : ''}>
       <Overlay onClick={() => dispatch(fechar())} />
       <BarraLateral>
-        <ul>
+        {/* <ul>
           {itens.map(({ titulo, url, preco, categoria, id }) => (
             <CarrinhoItem
               key={titulo}
@@ -60,7 +61,8 @@ const Carrinho = () => {
           <p>Valor total</p>
           <span>{formaPreco(precoTotal)}</span>
         </InfosItem>
-        <Botao type="button">Continuar com a compra</Botao>
+        <Botao type="button">Continuar com a compra</Botao> */}
+        <CadastroPagemnto />
       </BarraLateral>
     </CarrinhoContainer>
   )
