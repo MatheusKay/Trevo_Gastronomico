@@ -7,10 +7,17 @@ import { usePurchaseMutation } from '../../services/api'
 
 import { Botao } from '../../estiloGlobal'
 import { LinhaFlex, Campo, Label, Titulo } from './style'
+import { RootReducer } from '../../store'
+import { getTotalPrecos, formaPreco } from '../../ultis'
 
-const CadastroPagemnto = () => {
+type Props = {
+  finalizaCompra: boolean
+}
+
+const CadastroPagemnto = ({ finalizaCompra }: Props) => {
   const [cadastroPreenchido, setCadastroPreenchido] = useState(false)
   const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
+  const { itens } = useSelector((state: RootReducer) => state.carrinho)
 
   const form = useFormik({
     initialValues: {
@@ -18,7 +25,8 @@ const CadastroPagemnto = () => {
       endereco: '',
       cidade: '',
       cep: '',
-      numero: 0,
+      numero: '',
+      complemento: '',
       nomeCartao: '',
       numeroCartao: '',
       codigoSeguranca: '',
@@ -54,7 +62,33 @@ const CadastroPagemnto = () => {
       )
     }),
     onSubmit: (values) => {
-      console.log(values)
+      purchase({
+        delivery: {
+          receiver: values.nome,
+          address: {
+            description: values.endereco,
+            city: values.cidade,
+            zipCode: values.cep,
+            number: Number(values.numero),
+            complement: values.complemento
+          }
+        },
+        payment: {
+          card: {
+            name: values.nomeCartao,
+            number: values.numeroCartao,
+            code: Number(values.codigoSeguranca),
+            expires: {
+              month: Number(values.vencimentoMes),
+              year: Number(values.vencimentoAno)
+            }
+          }
+        },
+        products: itens.map((item) => ({
+          id: item.id,
+          price: item.preco
+        }))
+      })
     }
   })
 
@@ -66,150 +100,189 @@ const CadastroPagemnto = () => {
     return hasError
   }
 
+  const validaInput = () => {
+    if (
+      form.values.cep &&
+      form.values.cidade &&
+      form.values.endereco &&
+      form.values.nome &&
+      form.values.numero
+    ) {
+      setCadastroPreenchido(true)
+      form.setFieldTouched('nomeCartao', false)
+    } else {
+      setCadastroPreenchido(false)
+    }
+  }
+
+  const precoPagar = getTotalPrecos(itens)
+
   return (
     <>
-      {cadastroPreenchido ? (
-        <form onSubmit={form.handleSubmit}>
-          <div>
-            <Titulo>Pagamento - Valor a pagar R$ 190,90</Titulo>
-            <div>
-              <Label htmlFor="nomeCartao">Nome no cartão</Label>
-              <Campo
-                type="text"
-                id="nomeCartao"
-                value={form.values.nomeCartao}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-                className={checkInputHasError('nomeCartao') ? 'erro' : ''}
-              />
-            </div>
-            <LinhaFlex>
+      {finalizaCompra ? (
+        <>
+          {cadastroPreenchido ? (
+            <form onSubmit={form.handleSubmit}>
               <div>
-                <Label htmlFor="numeroCartao">Número do cartão</Label>
-                <Campo
-                  type="text"
-                  id="numeroCartao"
-                  value={form.values.numeroCartao}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError('numeroCartao') ? 'erro' : ''}
-                />
+                <Titulo>
+                  Pagamento - Valor a pagar {formaPreco(precoPagar)}
+                </Titulo>
+                <div>
+                  <Label htmlFor="nomeCartao">Nome no cartão</Label>
+                  <Campo
+                    type="text"
+                    id="nomeCartao"
+                    value={form.values.nomeCartao}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                    className={checkInputHasError('nomeCartao') ? 'erro' : ''}
+                  />
+                </div>
+                <LinhaFlex>
+                  <div>
+                    <Label htmlFor="numeroCartao">Número do cartão</Label>
+                    <Campo
+                      type="text"
+                      id="numeroCartao"
+                      value={form.values.numeroCartao}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                      className={
+                        checkInputHasError('numeroCartao') ? 'erro' : ''
+                      }
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="codigoSeguranca">CVV</Label>
+                    <Campo
+                      type="text"
+                      id="codigoSeguranca"
+                      value={form.values.codigoSeguranca}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                      className={
+                        checkInputHasError('codigoSeguranca') ? 'erro' : ''
+                      }
+                    />
+                  </div>
+                </LinhaFlex>
+                <LinhaFlex>
+                  <div>
+                    <Label htmlFor="vencimentoMes">Mês de vencimento</Label>
+                    <Campo
+                      type="text"
+                      id="vencimentoMes"
+                      value={form.values.vencimentoMes}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                      className={
+                        checkInputHasError('vencimentoMes') ? 'erro' : ''
+                      }
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="vencimentoAno">Ano de vencimento</Label>
+                    <Campo
+                      type="text"
+                      id="vencimentoAno"
+                      value={form.values.vencimentoAno}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                      className={
+                        checkInputHasError('vencimentoAno') ? 'erro' : ''
+                      }
+                    />
+                  </div>
+                </LinhaFlex>
+                <Botao
+                  type="button"
+                  onClick={() => setCadastroPreenchido(false)}
+                >
+                  Voltar para a edição de endereço
+                </Botao>
               </div>
+              <Botao type="submit">Finalizar pagamento</Botao>
+            </form>
+          ) : (
+            <form onSubmit={form.handleSubmit}>
               <div>
-                <Label htmlFor="codigoSeguranca">CVV</Label>
-                <Campo
-                  type="text"
-                  id="codigoSeguranca"
-                  value={form.values.codigoSeguranca}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={
-                    checkInputHasError('codigoSeguranca') ? 'erro' : ''
-                  }
-                />
+                <Titulo>Entrega</Titulo>
+                <div>
+                  <Label htmlFor="nome">Quem irá receber</Label>
+                  <Campo
+                    type="text"
+                    id="nome"
+                    value={form.values.nome}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                    className={checkInputHasError('nome') ? 'erro' : ''}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="endereco">Endereço</Label>
+                  <Campo
+                    type="text"
+                    id="endereco"
+                    value={form.values.endereco}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                    className={checkInputHasError('endereco') ? 'erro' : ''}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="cidade">Cidade</Label>
+                  <Campo
+                    type="text"
+                    id="cidade"
+                    value={form.values.cidade}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                    className={checkInputHasError('cidade') ? 'erro' : ''}
+                  />
+                </div>
+                <LinhaFlex>
+                  <div>
+                    <Label htmlFor="cep">CEP</Label>
+                    <Campo
+                      type="text"
+                      id="cep"
+                      value={form.values.cep}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                      className={checkInputHasError('cep') ? 'erro' : ''}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="numero">Número</Label>
+                    <Campo
+                      type="text"
+                      id="numero"
+                      value={form.values.numero}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                      className={checkInputHasError('numero') ? 'erro' : ''}
+                    />
+                  </div>
+                </LinhaFlex>
+                <div>
+                  <Label htmlFor="complemento">Complemento (opicional)</Label>
+                  <Campo
+                    type="text"
+                    id="complemento"
+                    value={form.values.complemento}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                </div>
               </div>
-            </LinhaFlex>
-            <LinhaFlex>
-              <div>
-                <Label htmlFor="vencimentoMes">Mês de vencimento</Label>
-                <Campo
-                  type="text"
-                  id="vencimentoMes"
-                  value={form.values.vencimentoMes}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError('vencimentoMes') ? 'erro' : ''}
-                />
-              </div>
-              <div>
-                <Label htmlFor="vencimentoAno">Ano de vencimento</Label>
-                <Campo
-                  type="text"
-                  id="vencimentoAno"
-                  value={form.values.vencimentoAno}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError('vencimentoAno') ? 'erro' : ''}
-                />
-              </div>
-            </LinhaFlex>
-            <Botao type="button" onClick={() => setCadastroPreenchido(false)}>
-              Voltar para a edição de endereço
-            </Botao>
-          </div>
-          <Botao type="submit">Finalizar pagamento</Botao>
-        </form>
+              <Botao type="submit" onClick={validaInput}>
+                Continuar com o pagamento
+              </Botao>
+            </form>
+          )}
+        </>
       ) : (
-        <form onSubmit={form.handleSubmit}>
-          <div>
-            <Titulo>Entrega</Titulo>
-            <div>
-              <Label htmlFor="nome">Quem irá receber</Label>
-              <Campo
-                type="text"
-                id="nome"
-                value={form.values.nome}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-                className={checkInputHasError('nome') ? 'erro' : ''}
-              />
-            </div>
-            <div>
-              <Label htmlFor="endereco">Endereço</Label>
-              <Campo
-                type="text"
-                id="endereco"
-                value={form.values.endereco}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-                className={checkInputHasError('endereco') ? 'erro' : ''}
-              />
-            </div>
-            <div>
-              <Label htmlFor="cidade">Cidade</Label>
-              <Campo
-                type="text"
-                id="cidade"
-                value={form.values.cidade}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-                className={checkInputHasError('cidade') ? 'erro' : ''}
-              />
-            </div>
-            <LinhaFlex>
-              <div>
-                <Label htmlFor="cep">CEP</Label>
-                <Campo
-                  type="text"
-                  id="cep"
-                  value={form.values.cep}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError('cep') ? 'erro' : ''}
-                />
-              </div>
-              <div>
-                <Label htmlFor="numero">Número</Label>
-                <Campo
-                  type="text"
-                  id="numero"
-                  value={form.values.numero}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError('numero') ? 'erro' : ''}
-                />
-              </div>
-            </LinhaFlex>
-            <div>
-              <Label htmlFor="complemento">Complemento (opicional)</Label>
-              <Campo type="text" id="complemento" />
-            </div>
-            <Botao type="button">Voltar para o carrinho</Botao>
-          </div>
-          <Botao type="submit" onClick={() => setCadastroPreenchido(true)}>
-            Continuar com o pagamento
-          </Botao>
-        </form>
+        <p></p>
       )}
     </>
   )

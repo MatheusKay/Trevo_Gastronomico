@@ -12,6 +12,7 @@ import { Menu } from '../../pages/Restaurantes'
 import { Botao } from '../../estiloGlobal'
 
 import { addModal, abrir } from '../../store/reducers/carrinho'
+import { formaPreco } from '../../ultis'
 
 type Props = {
   titulo?: string
@@ -28,13 +29,6 @@ export type Modal = {
   nota: number
   preco: number
   id: number
-}
-
-export const formaPreco = (preco = 0) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(preco)
 }
 
 const PratosList = ({ titulo, menu, id }: Props) => {

@@ -10,7 +10,7 @@ import {
   RemoverItem
 } from './style'
 
-import { formaPreco } from '../PratosList'
+import { formaPreco } from '../../ultis'
 import { remover } from '../../store/reducers/carrinho'
 
 type Props = {

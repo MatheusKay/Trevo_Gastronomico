@@ -3,29 +3,29 @@ import { Rest } from '../pages/Restaurantes'
 
 type Produto = {
   id: number
-  preco: number
+  price: number
 }
 
 type Pagamento = {
-  produtos: Produto[]
-  entrega: {
-    destinatario: string
-    endereco: {
-      descricao: string
-      cidade: string
-      cep: string
-      numero: number
-      complemento: string
+  products: Produto[]
+  delivery: {
+    receiver: string
+    address: {
+      description: string
+      city: string
+      zipCode: string
+      number: number
+      complement: string
     }
   }
-  Resposta: {
-    cartao: {
-      nome: string
-      numero: number
-      codigo: number
-      expiracao: {
-        mes: number
-        ano: number
+  payment: {
+    card: {
+      name: string
+      number: string
+      code: number
+      expires: {
+        month: number
+        year: number
       }
     }
   }
