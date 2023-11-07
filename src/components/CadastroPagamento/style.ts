@@ -1,12 +1,6 @@
 import styled from 'styled-components'
 import { cores } from '../../estiloGlobal'
 
-export const ContainerForm = styled.div`
-  height: 100%;
-  max-height: 1000px;
-  overflow-y: scroll;
-`
-
 export const LinhaFlex = styled.div`
   display: flex;
   column-gap: 34px;
@@ -38,4 +32,13 @@ export const Titulo = styled.h3`
   margin-bottom: 16px;
   font-size: 16px;
   color: ${cores.branco};
+`
+
+export const ContainerAgradecimento = styled.div`
+  font-size: 14px;
+  color: ${cores.branco};
+
+  .margin-top {
+    margin-top: 24px;
+  }
 `

@@ -14,6 +14,12 @@ export const CarrinhoContainer = styled.div`
   &.is-open {
     display: flex;
   }
+
+  .carrinho-vazio {
+    font-size: 12px;
+    color: ${cores.branco};
+    text-align: center;
+  }
 `
 
 export const Overlay = styled.div`

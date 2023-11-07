@@ -32,7 +32,7 @@ type Pagamento = {
 }
 
 type PagamentoResposta = {
-  onderId: string
+  orderId: string
 }
 
 const api = createApi({
