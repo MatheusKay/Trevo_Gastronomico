@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
@@ -14,7 +14,9 @@ import {
   ContainerAgradecimento
 } from './style'
 import { RootReducer } from '../../store'
+import { limpaCarrinho } from '../../store/reducers/carrinho'
 import { getTotalPrecos, formaPreco } from '../../ultis'
+import { truncate } from 'fs'
 
 type Props = {
   finalizaCompra: boolean
@@ -23,6 +25,8 @@ type Props = {
 
 const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
   const [cadastroPreenchido, setCadastroPreenchido] = useState(false)
+  const [validaCartao, setValidaCartao] = useState(false)
+  const dispatch = useDispatch()
   const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
   const { itens } = useSelector((state: RootReducer) => state.carrinho)
 
@@ -100,14 +104,14 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
   })
 
   const checkInputHasError = (fieldName: string) => {
-    // const isTouched = fieldName in form.touched
+    const isTouched = fieldName in form.touched
     const isInvalid = fieldName in form.errors
-    // const hasError = isTouched && isInvalid
+    const hasError = isTouched && isInvalid
 
-    return isInvalid
+    return hasError
   }
 
-  const validaInput = () => {
+  const validaInputDados = () => {
     if (
       form.values.cep &&
       form.values.cidade &&
@@ -120,6 +124,44 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
       setCadastroPreenchido(false)
     }
   }
+
+  const validaInputCartao = () => {
+    if (
+      form.values.nomeCartao &&
+      form.values.numeroCartao &&
+      form.values.codigoSeguranca &&
+      form.values.vencimentoMes &&
+      form.values.vencimentoAno
+    ) {
+      setValidaCartao(false)
+    } else {
+      setValidaCartao(true)
+    }
+  }
+
+  useEffect(() => {
+    if (
+      form.values.nomeCartao &&
+      form.values.numeroCartao &&
+      form.values.codigoSeguranca &&
+      form.values.vencimentoMes &&
+      form.values.vencimentoAno
+    ) {
+      setValidaCartao(false)
+    }
+  }, [
+    form.values.nomeCartao,
+    form.values.numeroCartao,
+    form.values.codigoSeguranca,
+    form.values.vencimentoMes,
+    form.values.vencimentoAno
+  ])
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(limpaCarrinho())
+    }
+  }, [isSuccess, dispatch])
 
   const precoPagar = getTotalPrecos(itens)
 
@@ -147,6 +189,9 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
               gastronômica. Bom apetite!
             </p>
           </ContainerAgradecimento>
+          <Botao type="button" onClick={onClick}>
+            Voltar para o carrinho
+          </Botao>
         </>
       ) : (
         <>
@@ -166,9 +211,7 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
                         value={form.values.nomeCartao}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
-                        className={
-                          checkInputHasError('nomeCartao') ? 'erro' : ''
-                        }
+                        className={validaCartao ? 'erro' : ''}
                       />
                     </div>
                     <LinhaFlex>
@@ -180,9 +223,7 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
                           value={form.values.numeroCartao}
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
-                          className={
-                            checkInputHasError('numeroCartao') ? 'erro' : ''
-                          }
+                          className={validaCartao ? 'erro' : ''}
                         />
                       </div>
                       <div>
@@ -193,9 +234,7 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
                           value={form.values.codigoSeguranca}
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
-                          className={
-                            checkInputHasError('codigoSeguranca') ? 'erro' : ''
-                          }
+                          className={validaCartao ? 'erro' : ''}
                         />
                       </div>
                     </LinhaFlex>
@@ -208,9 +247,7 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
                           value={form.values.vencimentoMes}
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
-                          className={
-                            checkInputHasError('vencimentoMes') ? 'erro' : ''
-                          }
+                          className={validaCartao ? 'erro' : ''}
                         />
                       </div>
                       <div>
@@ -221,20 +258,20 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
                           value={form.values.vencimentoAno}
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
-                          className={
-                            checkInputHasError('vencimentoAno') ? 'erro' : ''
-                          }
+                          className={validaCartao ? 'erro' : ''}
                         />
                       </div>
                     </LinhaFlex>
-                    <Botao
-                      type="button"
-                      onClick={() => setCadastroPreenchido(false)}
-                    >
-                      Voltar para a edição de endereço
-                    </Botao>
                   </div>
-                  <Botao type="submit">Finalizar pagamento</Botao>
+                  <Botao type="submit" onClick={validaInputCartao}>
+                    Finalizar pagamento
+                  </Botao>
+                  <Botao
+                    type="button"
+                    onClick={() => setCadastroPreenchido(false)}
+                  >
+                    Voltar para a edição de endereço
+                  </Botao>
                 </form>
               ) : (
                 <form onSubmit={form.handleSubmit}>
@@ -310,7 +347,7 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
                       />
                     </div>
                   </div>
-                  <Botao type="submit" onClick={validaInput}>
+                  <Botao type="submit" onClick={validaInputDados}>
                     Continuar com o pagamento
                   </Botao>
                   <Botao type="button" onClick={onClick}>

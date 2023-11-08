@@ -51,11 +51,14 @@ const carrinhoSlice = createSlice({
     },
     fechar: (state) => {
       state.estaAberto = false
+    },
+    limpaCarrinho: (state) => {
+      state.itens = []
     }
   }
 })
 
-export const { addModal, addMenu, remover, abrir, fechar } =
+export const { addModal, addMenu, remover, abrir, fechar, limpaCarrinho } =
   carrinhoSlice.actions
 
 export default carrinhoSlice.reducer
