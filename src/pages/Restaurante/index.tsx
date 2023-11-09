@@ -2,31 +2,26 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { formaPreco } from '../../ultis'
-
-import {
-  BannerRest,
-  Aside,
-  ContainerDescRest,
-  ContainerMenu,
-  DescRest,
-  LogoRest,
-  Titulo,
-  TituloSec
-} from './style'
 import CardPrato2 from '../../components/CardPrato2.0'
 
 import { useGetRestauranteQuery } from '../../services/api'
 import { abrir, addMenu } from '../../store/reducers/carrinho'
-import { Menu } from '../Restaurantes'
+
+import { formaPreco } from '../../ultis'
+
+import * as S from './style'
+
+type PratoParametro = {
+  id: string
+}
 
 const PagRestaurante = () => {
   const dispatch = useDispatch()
 
-  const { id } = useParams()
+  const { id } = useParams() as PratoParametro
 
   const [categoria, setCategoria] = useState('Entrada')
-  const { data: restaurante } = useGetRestauranteQuery(id!)
+  const { data: restaurante } = useGetRestauranteQuery(id)
 
   if (!restaurante) {
     return <p>Carregando...</p>
@@ -43,27 +38,27 @@ const PagRestaurante = () => {
 
   return (
     <>
-      <BannerRest style={{ backgroundImage: `url(${restaurante.capa})` }} />
+      <S.BannerRest style={{ backgroundImage: `url(${restaurante.capa})` }} />
       <div className="container">
-        <LogoRest>
+        <S.LogoRest>
           <img src={restaurante.logo} alt={restaurante.titulo} />
-          <Titulo>{restaurante.titulo}</Titulo>
-        </LogoRest>
-        <ContainerDescRest>
-          <DescRest>{restaurante.descricao}</DescRest>
-        </ContainerDescRest>
-        <ContainerMenu>
-          <Aside>
-            <TituloSec onClick={() => setCategoria('Entrada')}>
+          <S.Titulo>{restaurante.titulo}</S.Titulo>
+        </S.LogoRest>
+        <S.ContainerDescRest>
+          <S.DescRest>{restaurante.descricao}</S.DescRest>
+        </S.ContainerDescRest>
+        <S.ContainerMenu>
+          <S.Aside>
+            <S.TituloSec onClick={() => setCategoria('Entrada')}>
               Entradas
-            </TituloSec>
-            <TituloSec onClick={() => setCategoria('Prato principal')}>
+            </S.TituloSec>
+            <S.TituloSec onClick={() => setCategoria('Prato principal')}>
               Pratos principais
-            </TituloSec>
-            <TituloSec onClick={() => setCategoria('Sobremesa')}>
+            </S.TituloSec>
+            <S.TituloSec onClick={() => setCategoria('Sobremesa')}>
               Sobremesas
-            </TituloSec>
-          </Aside>
+            </S.TituloSec>
+          </S.Aside>
           <div>
             {filtroMenu.map((item) => (
               <div onClick={() => addPrato(item)} key={item.id}>
@@ -76,7 +71,7 @@ const PagRestaurante = () => {
               </div>
             ))}
           </div>
-        </ContainerMenu>
+        </S.ContainerMenu>
       </div>
     </>
   )

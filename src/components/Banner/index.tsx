@@ -1,29 +1,27 @@
 import { Link } from 'react-router-dom'
 
-import { Imagem, ContainerRest, Titulo } from './style'
-
-import { Rest } from '../../pages/Restaurantes'
+import * as S from './style'
 
 type Props = {
   imagens: Rest[]
 }
 
 const Banner = ({ imagens }: Props) => (
-  <Imagem>
+  <S.Imagem>
     <div className="container">
-      <Titulo>
+      <S.Titulo>
         Saboreie o melhor da culinária nos restaurantes mais incríveis. Seu
         paladar agradece, no <span>Trevo da Gastronomia</span>
-      </Titulo>
+      </S.Titulo>
     </div>
-    <ContainerRest>
+    <S.ContainerRest>
       {imagens.map((imagem) => (
         <Link to={`/restaurante/${imagem.id}`} key={imagem.id}>
           <img src={imagem.logo} alt={imagem.titulo} />
         </Link>
       ))}
-    </ContainerRest>
-  </Imagem>
+    </S.ContainerRest>
+  </S.Imagem>
 )
 
 export default Banner

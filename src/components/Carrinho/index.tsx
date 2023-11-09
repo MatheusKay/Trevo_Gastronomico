@@ -1,15 +1,17 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { CarrinhoContainer, Overlay, BarraLateral, InfosItem } from './style'
-import { Botao } from '../../estiloGlobal'
-
-import { RootReducer } from '../../store'
-
-import { fechar } from '../../store/reducers/carrinho'
-import { formaPreco } from '../../ultis'
 import CarrinhoItem from '../CarrinhoItem'
 import CadastroPagemnto from '../CadastroPagamento'
+
+import { RootReducer } from '../../store'
+import { fechar } from '../../store/reducers/carrinho'
+
+import { formaPreco } from '../../ultis'
+import { precoDoMenu, precoDoSite } from '../../ultis'
+
+import * as S from './style'
+import { Botao } from '../../estiloGlobal'
 
 const Carrinho = () => {
   const { estaAberto, itens, itensMenu } = useSelector(
@@ -18,24 +20,12 @@ const Carrinho = () => {
   const dispatch = useDispatch()
   const [finalizarCompra, setFinalizarCompra] = useState(false)
 
-  const precoDoMenu = () => {
-    return itensMenu.reduce((acumulador, valorAtual) => {
-      return (acumulador += valorAtual.preco!)
-    }, 0)
-  }
-
-  const precoDoSite = () => {
-    return itens.reduce((acumulador, valorAtual) => {
-      return (acumulador += valorAtual.preco!)
-    }, 0)
-  }
-
-  const precoTotal = precoDoSite() + precoDoMenu()
+  const precoTotal = precoDoSite(itens) + precoDoMenu(itensMenu)
 
   return (
-    <CarrinhoContainer className={estaAberto ? 'is-open' : ''}>
-      <Overlay onClick={() => dispatch(fechar())} />
-      <BarraLateral>
+    <S.CarrinhoContainer className={estaAberto ? 'is-open' : ''}>
+      <S.Overlay onClick={() => dispatch(fechar())} />
+      <S.BarraLateral>
         {finalizarCompra ? (
           <>
             <CadastroPagemnto
@@ -69,10 +59,10 @@ const Carrinho = () => {
                     />
                   ))}
                 </ul>
-                <InfosItem>
+                <S.InfosItem>
                   <p>Valor total</p>
                   <span>{formaPreco(precoTotal)}</span>
-                </InfosItem>
+                </S.InfosItem>
                 <Botao type="button" onClick={() => setFinalizarCompra(true)}>
                   Continuar com a compra
                 </Botao>
@@ -86,8 +76,8 @@ const Carrinho = () => {
             )}
           </>
         )}
-      </BarraLateral>
-    </CarrinhoContainer>
+      </S.BarraLateral>
+    </S.CarrinhoContainer>
   )
 }
 

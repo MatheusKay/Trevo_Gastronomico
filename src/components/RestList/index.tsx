@@ -1,8 +1,6 @@
 import CardPrato from '../CardPrato'
 
-import { Titulo, List, PratosLista, LinkRest } from './style'
-
-import { Rest } from '../../pages/Restaurantes'
+import * as S from './style'
 
 type Props = {
   titulo?: string
@@ -11,13 +9,13 @@ type Props = {
 
 const RestList = ({ titulo, rest }: Props) => {
   return (
-    <PratosLista>
+    <S.PratosLista>
       <div className="container">
-        {titulo && <Titulo>{titulo}</Titulo>}
-        <List>
+        {titulo && <S.Titulo>{titulo}</S.Titulo>}
+        <S.List>
           {rest?.map((item) => {
             return (
-              <LinkRest to={`/restaurante/${item.id}`} key={item.titulo}>
+              <S.LinkRest to={`/restaurante/${item.id}`} key={item.titulo}>
                 <CardPrato
                   imagem={item.capa}
                   titulo={item.titulo}
@@ -26,12 +24,12 @@ const RestList = ({ titulo, rest }: Props) => {
                   descricao={item.descricao}
                   id={item.id}
                 />
-              </LinkRest>
+              </S.LinkRest>
             )
           })}
-        </List>
+        </S.List>
       </div>
-    </PratosLista>
+    </S.PratosLista>
   )
 }
 

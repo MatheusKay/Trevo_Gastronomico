@@ -1,5 +1,5 @@
 import PratosList from '../../components/PratosList'
-import { Menu } from '../Restaurantes'
+
 import { useGetRestaurantesQuery } from '../../services/api'
 
 const MenuList = () => {

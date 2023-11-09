@@ -4,31 +4,20 @@ import { useDispatch } from 'react-redux'
 import CardPrato from '../CardPrato'
 import Tag from '../Tag'
 
-import * as S from './style'
+import { addModal, abrir } from '../../store/reducers/carrinho'
+
+import { formaPreco } from '../../ultis'
+
 import vetorEstrela from '../../assets/images/Vetor_Estrela.png'
 import vetorFechar from '../../assets/images/fechar.png'
 
-import { Menu } from '../../pages/Restaurantes'
+import * as S from './style'
 import { Botao } from '../../estiloGlobal'
-
-import { addModal, abrir } from '../../store/reducers/carrinho'
-import { formaPreco } from '../../ultis'
 
 type Props = {
   titulo?: string
   menu?: Menu[]
   id?: string
-}
-
-export type Modal = {
-  estaVisivel?: boolean
-  url?: string
-  titulo?: string
-  descricao: string
-  categoria: string
-  nota: number
-  preco: number
-  id: number
 }
 
 const PratosList = ({ titulo, menu, id }: Props) => {

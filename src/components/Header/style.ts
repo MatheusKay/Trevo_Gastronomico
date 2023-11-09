@@ -13,15 +13,8 @@ export const Cabecalho = styled.header`
   color: ${cores.branco};
 
   @media (max-width: ${breakpoints.tablet}) {
-    display: none;
+    flex-wrap: wrap;
   }
-`
-
-export const ContainerHeader = styled.div`
-  width: 60%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 `
 
 export const Links = styled.ul`
@@ -35,6 +28,20 @@ export const Links = styled.ul`
     color: ${cores.branco};
   }
 `
+
+export const ContainerHeader = styled.div`
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    ${Links} {
+      display: none;
+    }
+  }
+`
+
 export const ContainerCarrinho = styled.a`
   margin-right: 16px;
   position: relative;
@@ -55,4 +62,46 @@ export const NumCarrinho = styled.span`
   color: ${cores.cinza};
   font-size: 14px;
   text-align: center;
+`
+
+export const Humburgue = styled.div`
+  width: 32px;
+
+  span {
+    width: 100%;
+    height: 2px;
+    margin-bottom: 4px;
+    display: block;
+    background-color: ${cores.branco};
+  }
+`
+
+export const NavHamburgue = styled.div`
+  width: 100%;
+  height: 0;
+  opacity: 0;
+
+  ul {
+    margin-top: 16px;
+    flex-direction: column;
+    row-gap: 16px;
+
+    li {
+      padding: 8px;
+      background-color: ${cores.vioetaClaro};
+      border-radius: 8px;
+    }
+  }
+
+  a {
+    width: 100%;
+    display: block;
+    color: ${cores.violeta};
+  }
+
+  &.aberto {
+    height: auto;
+    opacity: 1;
+    transition: opacity 2s ease;
+  }
 `

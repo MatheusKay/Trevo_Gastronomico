@@ -2,21 +2,16 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import InputMask from 'react-input-mask'
 
 import { usePurchaseMutation } from '../../services/api'
+import { getTotalPrecos, formaPreco } from '../../ultis'
 
-import { Botao } from '../../estiloGlobal'
-import {
-  LinhaFlex,
-  Campo,
-  Label,
-  Titulo,
-  ContainerAgradecimento
-} from './style'
 import { RootReducer } from '../../store'
 import { limpaCarrinho } from '../../store/reducers/carrinho'
-import { getTotalPrecos, formaPreco } from '../../ultis'
-import { truncate } from 'fs'
+
+import { Botao } from '../../estiloGlobal'
+import * as S from './style'
 
 type Props = {
   finalizaCompra: boolean
@@ -27,7 +22,7 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
   const [cadastroPreenchido, setCadastroPreenchido] = useState(false)
   const [validaCartao, setValidaCartao] = useState(false)
   const dispatch = useDispatch()
-  const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
+  const [purchase, { data, isSuccess }] = usePurchaseMutation()
   const { itens } = useSelector((state: RootReducer) => state.carrinho)
 
   const form = useFormik({
@@ -47,7 +42,7 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
     validationSchema: Yup.object({
       nome: Yup.string()
         .min(3, 'O nome precisa ter pelo menos 5 caracteres')
-        .required('o campo é obrigatorio'),
+        .required('o input é obrigatorio'),
       endereco: Yup.string().required('o campo é obrigatorio'),
       cidade: Yup.string().required('o campo é obrigatorio'),
       cep: Yup.string()
@@ -169,8 +164,8 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
     <>
       {data && isSuccess ? (
         <>
-          <Titulo>Pedido realizado - {data.orderId}</Titulo>
-          <ContainerAgradecimento>
+          <S.Titulo>Pedido realizado - {data.orderId}</S.Titulo>
+          <S.ContainerAgradecimento>
             <p>
               Estamos felizes em informar que seu pedido já está em processo de
               preparação e, em breve, será entregue no endereço fornecido.
@@ -188,7 +183,7 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
               Esperamos que desfrute de uma deliciosa e agradável experiência
               gastronômica. Bom apetite!
             </p>
-          </ContainerAgradecimento>
+          </S.ContainerAgradecimento>
           <Botao type="button" onClick={onClick}>
             Voltar para o carrinho
           </Botao>
@@ -198,14 +193,14 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
           {finalizaCompra ? (
             <>
               {cadastroPreenchido ? (
-                <form onSubmit={form.handleSubmit}>
+                <S.FormContainer onSubmit={form.handleSubmit}>
                   <div>
-                    <Titulo>
+                    <S.Titulo>
                       Pagamento - Valor a pagar {formaPreco(precoPagar)}
-                    </Titulo>
+                    </S.Titulo>
                     <div>
-                      <Label htmlFor="nomeCartao">Nome no cartão</Label>
-                      <Campo
+                      <label htmlFor="nomeCartao">Nome no cartão</label>
+                      <input
                         type="text"
                         id="nomeCartao"
                         value={form.values.nomeCartao}
@@ -214,54 +209,58 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
                         className={validaCartao ? 'erro' : ''}
                       />
                     </div>
-                    <LinhaFlex>
+                    <S.LinhaFlex>
                       <div>
-                        <Label htmlFor="numeroCartao">Número do cartão</Label>
-                        <Campo
+                        <label htmlFor="numeroCartao">Número do cartão</label>
+                        <InputMask
                           type="text"
                           id="numeroCartao"
                           value={form.values.numeroCartao}
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           className={validaCartao ? 'erro' : ''}
+                          mask="9999 9999 9999 9999"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="codigoSeguranca">CVV</Label>
-                        <Campo
+                        <label htmlFor="codigoSeguranca">CVV</label>
+                        <InputMask
                           type="text"
                           id="codigoSeguranca"
                           value={form.values.codigoSeguranca}
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           className={validaCartao ? 'erro' : ''}
+                          mask="999"
                         />
                       </div>
-                    </LinhaFlex>
-                    <LinhaFlex>
+                    </S.LinhaFlex>
+                    <S.LinhaFlex>
                       <div>
-                        <Label htmlFor="vencimentoMes">Mês de vencimento</Label>
-                        <Campo
+                        <label htmlFor="vencimentoMes">Mês de vencimento</label>
+                        <InputMask
                           type="text"
                           id="vencimentoMes"
                           value={form.values.vencimentoMes}
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           className={validaCartao ? 'erro' : ''}
+                          mask="99"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="vencimentoAno">Ano de vencimento</Label>
-                        <Campo
+                        <label htmlFor="vencimentoAno">Ano de vencimento</label>
+                        <InputMask
                           type="text"
                           id="vencimentoAno"
                           value={form.values.vencimentoAno}
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           className={validaCartao ? 'erro' : ''}
+                          mask="9999"
                         />
                       </div>
-                    </LinhaFlex>
+                    </S.LinhaFlex>
                   </div>
                   <Botao type="submit" onClick={validaInputCartao}>
                     Finalizar pagamento
@@ -272,14 +271,14 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
                   >
                     Voltar para a edição de endereço
                   </Botao>
-                </form>
+                </S.FormContainer>
               ) : (
-                <form onSubmit={form.handleSubmit}>
+                <S.FormContainer onSubmit={form.handleSubmit}>
                   <div>
-                    <Titulo>Entrega</Titulo>
+                    <S.Titulo>Entrega</S.Titulo>
                     <div>
-                      <Label htmlFor="nome">Quem irá receber</Label>
-                      <Campo
+                      <label htmlFor="nome">Quem irá receber</label>
+                      <input
                         type="text"
                         id="nome"
                         value={form.values.nome}
@@ -289,8 +288,8 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="endereco">Endereço</Label>
-                      <Campo
+                      <label htmlFor="endereco">Endereço</label>
+                      <input
                         type="text"
                         id="endereco"
                         value={form.values.endereco}
@@ -300,8 +299,8 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="cidade">Cidade</Label>
-                      <Campo
+                      <label htmlFor="cidade">Cidade</label>
+                      <input
                         type="text"
                         id="cidade"
                         value={form.values.cidade}
@@ -310,21 +309,22 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
                         className={checkInputHasError('cidade') ? 'erro' : ''}
                       />
                     </div>
-                    <LinhaFlex>
+                    <S.LinhaFlex>
                       <div>
-                        <Label htmlFor="cep">CEP</Label>
-                        <Campo
+                        <label htmlFor="cep">CEP</label>
+                        <InputMask
                           type="text"
                           id="cep"
                           value={form.values.cep}
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           className={checkInputHasError('cep') ? 'erro' : ''}
+                          mask="99999-999"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="numero">Número</Label>
-                        <Campo
+                        <label htmlFor="numero">Número</label>
+                        <input
                           type="text"
                           id="numero"
                           value={form.values.numero}
@@ -333,12 +333,12 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
                           className={checkInputHasError('numero') ? 'erro' : ''}
                         />
                       </div>
-                    </LinhaFlex>
+                    </S.LinhaFlex>
                     <div>
-                      <Label htmlFor="complemento">
+                      <label htmlFor="complemento">
                         Complemento (opicional)
-                      </Label>
-                      <Campo
+                      </label>
+                      <input
                         type="text"
                         id="complemento"
                         value={form.values.complemento}
@@ -353,7 +353,7 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
                   <Botao type="button" onClick={onClick}>
                     Voltar para o carrinho
                   </Botao>
-                </form>
+                </S.FormContainer>
               )}
             </>
           ) : (

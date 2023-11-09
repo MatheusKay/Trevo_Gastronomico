@@ -1,8 +1,8 @@
 import Tag from '../Tag'
 
-import { Card, Infos, Titulo, Descricao, ImgMenu, Avaliacao } from './style'
-
 import vetorEstrela from '../../assets/images/Vetor_Estrela.png'
+
+import * as S from './style'
 
 type Props = {
   imagem: string
@@ -13,27 +13,20 @@ type Props = {
   id: number
 }
 
-const CardPrato = ({
-  imagem,
-  titulo,
-  nota,
-  categoria,
-  descricao,
-  id
-}: Props) => {
+const CardPrato = ({ imagem, titulo, nota, categoria, descricao }: Props) => {
   return (
-    <Card>
-      <ImgMenu src={imagem} alt={titulo} />
-      <Infos>
-        <Titulo>{titulo}</Titulo>
+    <S.Card>
+      <S.ImgMenu src={imagem} alt={titulo} />
+      <S.Infos>
+        <S.Titulo>{titulo}</S.Titulo>
         <Tag tag="bold">
           {nota}
-          <Avaliacao src={vetorEstrela} alt="Avaliação do prato" />
+          <S.Avaliacao src={vetorEstrela} alt="Avaliação do prato" />
         </Tag>
-      </Infos>
+      </S.Infos>
       {categoria && <Tag tag="normal">{categoria}</Tag>}
-      <Descricao>{descricao}</Descricao>
-    </Card>
+      <S.Descricao>{descricao}</S.Descricao>
+    </S.Card>
   )
 }
 

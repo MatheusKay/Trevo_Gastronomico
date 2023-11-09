@@ -1,7 +1,7 @@
 import Banner from '../../components/Banner'
 import PratosList from '../../components/PratosList'
-
 import RestList from '../../components/RestList'
+
 import { useGetRestaurantesQuery } from '../../services/api'
 
 const Home = () => {

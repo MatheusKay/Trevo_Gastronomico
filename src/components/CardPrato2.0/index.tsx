@@ -1,5 +1,4 @@
-import { Card, InfosCard, ValorCard, BotaoCard, DescCard } from './style'
-
+import * as S from './style'
 import { Botao } from '../../estiloGlobal'
 
 type Props = {
@@ -10,19 +9,19 @@ type Props = {
 }
 
 const CardPrato2 = ({ descricao, imagem, preco, titulo }: Props) => (
-  <Card>
+  <S.Card>
     <img src={imagem} alt={titulo} />
     <div>
-      <InfosCard>
+      <S.InfosCard>
         <h3>{titulo}</h3>
-        <ValorCard>{preco}</ValorCard>
-      </InfosCard>
-      <DescCard>{descricao}</DescCard>
-      <BotaoCard>
+        <S.ValorCard>{preco}</S.ValorCard>
+      </S.InfosCard>
+      <S.DescCard>{descricao}</S.DescCard>
+      <S.BotaoCard>
         <Botao type="button">Adicionar ao carrinho</Botao>
-      </BotaoCard>
+      </S.BotaoCard>
     </div>
-  </Card>
+  </S.Card>
 )
 
 export default CardPrato2

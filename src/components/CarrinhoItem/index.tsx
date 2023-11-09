@@ -1,17 +1,13 @@
 import { useDispatch } from 'react-redux'
 
-import fecharImg from '../../assets/images/fechar.png'
 import Tag from '../Tag'
 
-import {
-  CarrinhoItemContainer,
-  ContainerInfos,
-  InfosItem,
-  RemoverItem
-} from './style'
+import fecharImg from '../../assets/images/fechar.png'
 
 import { formaPreco } from '../../ultis'
 import { remover } from '../../store/reducers/carrinho'
+
+import * as S from './style'
 
 type Props = {
   id: number
@@ -33,19 +29,19 @@ const CarrinhoItem = ({ id, foto, nome, preco, categoria }: Props) => {
   }
 
   return (
-    <CarrinhoItemContainer key={nome}>
+    <S.CarrinhoItemContainer key={nome}>
       <img src={foto} alt="" />
-      <ContainerInfos>
-        <InfosItem>
+      <S.ContainerInfos>
+        <S.InfosItem>
           <h3>{nome ? limitarTexto(nome) : ''}</h3>
           <p>{formaPreco(preco)}</p>
-        </InfosItem>
+        </S.InfosItem>
         <Tag tag="normal">{categoria}</Tag>
-      </ContainerInfos>
-      <RemoverItem>
+      </S.ContainerInfos>
+      <S.RemoverItem>
         <img onClick={() => dispatch(remover(id))} src={fecharImg} alt="" />
-      </RemoverItem>
-    </CarrinhoItemContainer>
+      </S.RemoverItem>
+    </S.CarrinhoItemContainer>
   )
 }
 

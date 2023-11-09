@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Menu } from '../../pages/Restaurantes'
-import { Modal } from '../../components/PratosList'
 
 type CarrinhoEstado = {
   itens: Modal[]
