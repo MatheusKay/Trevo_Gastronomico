@@ -66,6 +66,7 @@ export const NumCarrinho = styled.span`
 
 export const Humburgue = styled.div`
   width: 32px;
+  display: none;
 
   span {
     width: 100%;
@@ -74,12 +75,15 @@ export const Humburgue = styled.div`
     display: block;
     background-color: ${cores.branco};
   }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: block;
+  }
 `
 
 export const NavHamburgue = styled.div`
   width: 100%;
-  height: 0;
-  opacity: 0;
+  display: none;
 
   ul {
     margin-top: 16px;
@@ -100,8 +104,6 @@ export const NavHamburgue = styled.div`
   }
 
   &.aberto {
-    height: auto;
-    opacity: 1;
-    transition: opacity 2s ease;
+    display: block;
   }
 `
