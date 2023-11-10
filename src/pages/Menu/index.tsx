@@ -1,4 +1,5 @@
 import PratosList from '../../components/PratosList'
+import Carregando from '../../components/Carregando'
 
 import { useGetRestaurantesQuery } from '../../services/api'
 
@@ -29,7 +30,7 @@ const MenuList = () => {
     )
   }
 
-  return <h4>Carregando...</h4>
+  return <Carregando />
 }
 
 export default MenuList

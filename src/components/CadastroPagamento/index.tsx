@@ -22,7 +22,7 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
   const [cadastroPreenchido, setCadastroPreenchido] = useState(false)
   const [validaCartao, setValidaCartao] = useState(false)
   const dispatch = useDispatch()
-  const [purchase, { data, isSuccess }] = usePurchaseMutation()
+  const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
   const { itens } = useSelector((state: RootReducer) => state.carrinho)
 
   const form = useFormik({
@@ -262,8 +262,14 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
                       </div>
                     </S.LinhaFlex>
                   </div>
-                  <Botao type="submit" onClick={validaInputCartao}>
-                    Finalizar pagamento
+                  <Botao
+                    type="submit"
+                    onClick={validaInputCartao}
+                    disabled={isLoading}
+                  >
+                    {isLoading
+                      ? 'Finalizando pagamento...'
+                      : 'Finalizar pagamento'}
                   </Botao>
                   <Botao
                     type="button"

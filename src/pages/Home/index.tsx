@@ -1,11 +1,12 @@
 import Banner from '../../components/Banner'
+import Carregando from '../../components/Carregando'
 import PratosList from '../../components/PratosList'
 import RestList from '../../components/RestList'
 
 import { useGetRestaurantesQuery } from '../../services/api'
 
 const Home = () => {
-  const { data: restaurantes } = useGetRestaurantesQuery()
+  const { data: restaurantes, isLoading } = useGetRestaurantesQuery()
 
   if (restaurantes) {
     const filtroRest = restaurantes.filter((restaurante) => {
@@ -19,7 +20,7 @@ const Home = () => {
 
     return (
       <>
-        <Banner imagens={filtroRest} />
+        <Banner imagens={filtroRest} estaCarregando={isLoading} />
         <PratosList
           titulo="Pratos principais"
           menu={menuRest}
@@ -30,7 +31,7 @@ const Home = () => {
     )
   }
 
-  return <h4>Carregando...</h4>
+  return <Carregando />
 }
 
 export default Home

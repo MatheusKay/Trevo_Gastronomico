@@ -35,7 +35,7 @@ const Carrinho = () => {
           </>
         ) : (
           <>
-            {itens.length > 0 ? (
+            {itens.length > 0 || itensMenu.length > 0 ? (
               <>
                 <ul>
                   {itens.map(({ titulo, url, preco, categoria, id }) => (

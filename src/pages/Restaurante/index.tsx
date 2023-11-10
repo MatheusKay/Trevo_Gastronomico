@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import CardPrato2 from '../../components/CardPrato2.0'
+import Carregando from '../../components/Carregando'
 
 import { useGetRestauranteQuery } from '../../services/api'
 import { abrir, addMenu } from '../../store/reducers/carrinho'
@@ -21,7 +22,7 @@ const PagRestaurante = () => {
   const { id } = useParams() as PratoParametro
 
   const [categoria, setCategoria] = useState('Entrada')
-  const { data: restaurante } = useGetRestauranteQuery(id)
+  const { data: restaurante, isLoading } = useGetRestauranteQuery(id)
 
   if (!restaurante) {
     return <p>Carregando...</p>
@@ -34,6 +35,10 @@ const PagRestaurante = () => {
   const addPrato = (item: Menu) => {
     dispatch(addMenu(item))
     dispatch(abrir())
+  }
+
+  if (isLoading) {
+    return <Carregando />
   }
 
   return (
