@@ -21,7 +21,10 @@ type Props = {
 const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
   const [cadastroPreenchido, setCadastroPreenchido] = useState(false)
   const [validaCartao, setValidaCartao] = useState(false)
+  const [atualizandoPreco, setAtualizandoPreco] = useState(0)
+
   const dispatch = useDispatch()
+
   const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
   const { itens } = useSelector((state: RootReducer) => state.carrinho)
 
@@ -160,6 +163,12 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
 
   const precoPagar = getTotalPrecos(itens)
 
+  useEffect(() => {
+    if (precoPagar > 0) {
+      setAtualizandoPreco(precoPagar)
+    }
+  }, [precoPagar])
+
   return (
     <>
       {data && isSuccess ? (
@@ -196,7 +205,7 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
                 <S.FormContainer onSubmit={form.handleSubmit}>
                   <div>
                     <S.Titulo>
-                      Pagamento - Valor a pagar {formaPreco(precoPagar)}
+                      Pagamento - Valor a pagar {formaPreco(atualizandoPreco)}
                     </S.Titulo>
                     <div>
                       <label htmlFor="nomeCartao">Nome no cartão</label>

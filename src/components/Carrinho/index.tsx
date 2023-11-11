@@ -37,7 +37,13 @@ const Carrinho = () => {
           <>
             {itens.length > 0 || itensMenu.length > 0 ? (
               <>
-                <ul>
+                <ul
+                  className={
+                    itens.length > 3 || itensMenu.length > 3
+                      ? 'rolagem-carrinho'
+                      : ''
+                  }
+                >
                   {itens.map(({ titulo, url, preco, categoria, id }) => (
                     <CarrinhoItem
                       key={titulo}

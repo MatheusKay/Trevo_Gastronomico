@@ -48,6 +48,14 @@ export const BarraLateral = styled.aside`
     font-size: 14px;
   }
 
+  ul {
+    &.rolagem-carrinho {
+      max-height: 345px;
+      height: 100%;
+      overflow-y: auto;
+    }
+  }
+
   @media (max-width: ${breakpoints.tablet}) {
     width: 80%;
   }

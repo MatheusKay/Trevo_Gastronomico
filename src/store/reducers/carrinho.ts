@@ -18,7 +18,7 @@ const carrinhoSlice = createSlice({
   reducers: {
     addModal: (state, action: PayloadAction<Modal>) => {
       const restaurante = state.itens.find(
-        (item) => item.id === action.payload.id
+        (item) => item.titulo === action.payload.titulo
       )
 
       if (!restaurante) {
@@ -29,7 +29,7 @@ const carrinhoSlice = createSlice({
     },
     addMenu: (state, action: PayloadAction<Menu>) => {
       const restauranteMenu = state.itensMenu.find(
-        (item) => item.id === action.payload.id
+        (item) => item.nome === action.payload.nome
       )
 
       if (!restauranteMenu) {
