@@ -22,6 +22,8 @@ const Carrinho = () => {
 
   const precoTotal = precoDoSite(itens) + precoDoMenu(itensMenu)
 
+  const totalItens = itens.concat(itensMenu)
+
   return (
     <S.CarrinhoContainer className={estaAberto ? 'is-open' : ''}>
       <S.Overlay onClick={() => dispatch(fechar())} />
@@ -35,15 +37,9 @@ const Carrinho = () => {
           </>
         ) : (
           <>
-            {itens.length > 0 || itensMenu.length > 0 ? (
+            {totalItens.length > 0 ? (
               <>
-                <ul
-                  className={
-                    itens.length > 3 || itensMenu.length > 3
-                      ? 'rolagem-carrinho'
-                      : ''
-                  }
-                >
+                <ul className={totalItens.length > 3 ? 'rolagem-carrinho' : ''}>
                   {itens.map(({ titulo, url, preco, categoria, id }) => (
                     <CarrinhoItem
                       key={titulo}

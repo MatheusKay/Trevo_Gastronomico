@@ -30,6 +30,8 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
     (state: RootReducer) => state.carrinho
   )
 
+  const totalItens = itens.concat(itensMenu)
+
   const form = useFormik({
     initialValues: {
       nome: '',
@@ -95,7 +97,7 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
             }
           }
         },
-        products: itens.map((item) => ({
+        products: totalItens.map((item) => ({
           id: item.id,
           price: item.preco
         }))
@@ -171,6 +173,11 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
     }
   }, [precoPagar])
 
+  const FinalizaLimpa = () => {
+    onClick()
+    dispatch(limpaCarrinho())
+  }
+
   return (
     <>
       {data && isSuccess ? (
@@ -195,7 +202,7 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
               gastronômica. Bom apetite!
             </p>
           </S.ContainerAgradecimento>
-          <Botao type="button" onClick={onClick}>
+          <Botao type="button" onClick={FinalizaLimpa}>
             Voltar para o carrinho
           </Botao>
         </>

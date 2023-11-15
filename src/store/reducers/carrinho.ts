@@ -52,6 +52,7 @@ const carrinhoSlice = createSlice({
     },
     limpaCarrinho: (state) => {
       state.itens = []
+      state.itensMenu = []
     }
   }
 })
