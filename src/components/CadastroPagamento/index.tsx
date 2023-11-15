@@ -26,7 +26,9 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
   const dispatch = useDispatch()
 
   const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
-  const { itens } = useSelector((state: RootReducer) => state.carrinho)
+  const { itens, itensMenu } = useSelector(
+    (state: RootReducer) => state.carrinho
+  )
 
   const form = useFormik({
     initialValues: {
@@ -161,7 +163,7 @@ const CadastroPagemnto = ({ finalizaCompra, onClick }: Props) => {
     }
   }, [isSuccess, dispatch])
 
-  const precoPagar = getTotalPrecos(itens)
+  const precoPagar = getTotalPrecos(itens) + getTotalPrecos(itensMenu)
 
   useEffect(() => {
     if (precoPagar > 0) {
